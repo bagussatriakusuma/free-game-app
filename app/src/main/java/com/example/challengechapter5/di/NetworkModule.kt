@@ -16,7 +16,7 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 class NetworkModule {
     companion object{
-        const val BASE_URL = "https://fp-fsw-backend.vercel.app/api/"
+        const val BASE_URL = "https://735d-158-140-170-59.ngrok-free.app/api/v1/"
         const val RETROFIT_AUTH = "RetrofitAuth"
     }
 

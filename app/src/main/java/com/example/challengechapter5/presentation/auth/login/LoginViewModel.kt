@@ -1,13 +1,17 @@
 package com.example.challengechapter5.presentation.auth.login
 
+import android.util.Log
+import android.util.Patterns
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.challengechapter5.data.remote.request.auth.LoginRequest
 import com.example.challengechapter5.data.remote.response.auth.GetUserResponse
 import com.example.challengechapter5.domain.repository.AuthRepository
 import com.example.challengechapter5.domain.repository.TokenRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -18,24 +22,33 @@ class LoginViewModel @Inject constructor(
     private val authRepository: AuthRepository,
     private val tokenRepository: TokenRepository
 ): ViewModel() {
-    private val _showUser = MutableLiveData<GetUserResponse>()
-    val showUser: LiveData<GetUserResponse> = _showUser
+    private val _openHomePage = MutableLiveData<Boolean>()
+    val openHomePage: LiveData<Boolean> = _openHomePage
 
     private val _error = MutableLiveData<String?>()
     val error: LiveData<String?> = _error
 
-    fun getUserData(){
+    fun userLogin(request: LoginRequest){
         viewModelScope.launch(Dispatchers.IO) {
-            runCatching {
-                authRepository.getDataUser(token = tokenRepository.getToken()!!)
-            }.onFailure { exception ->
+            try {
+                val result = authRepository.userLogin(request)
+                val token = result.accessToken.orEmpty()
+                insertToken(token = token)
                 withContext(Dispatchers.Main) {
-                    _error.value = exception.message
+                    _openHomePage.value = true
                 }
-            }.onSuccess { user ->
-                withContext(Dispatchers.Main) {
-                    _showUser.value = user
+            }catch (e: Exception) {
+                withContext(Dispatchers.Main){
+                    _error.value = e.message
                 }
+            }
+        }
+    }
+
+    private fun insertToken(token: String){
+        if(token.isNotEmpty()){
+            viewModelScope.launch {
+                tokenRepository.setToken(token)
             }
         }
     }

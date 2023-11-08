@@ -53,8 +53,8 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
     // Jetpack Navigation Components
-    implementation("androidx.navigation:navigation-fragment-ktx:2.4.2")
-    implementation("androidx.navigation:navigation-ui-ktx:2.4.2")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.7.5")
+    implementation("androidx.navigation:navigation-ui-ktx:2.7.5")
     implementation("com.makeramen:roundedimageview:2.3.0")
 
     // Kotlin Couroutines

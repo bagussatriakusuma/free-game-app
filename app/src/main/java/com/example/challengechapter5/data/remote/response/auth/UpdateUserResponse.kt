@@ -2,7 +2,7 @@ package com.example.challengechapter5.data.remote.response.auth
 
 import com.google.gson.annotations.SerializedName
 
-data class GetUserResponse (
+data class UpdateUserResponse(
 
     @SerializedName("id"           ) var id          : Int?    = null,
     @SerializedName("full_name"    ) var fullName    : String? = null,
