@@ -1,4 +1,4 @@
-package com.example.challengechapter5.presentation.auth.login
+package com.example.challengechapter5.presentation.auth.register
 
 import android.content.Context
 import android.content.Intent
@@ -6,28 +6,28 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Patterns
 import androidx.activity.viewModels
-import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import androidx.navigation.fragment.findNavController
 import com.example.challengechapter5.R
 import com.example.challengechapter5.data.remote.request.auth.LoginRequest
-import com.example.challengechapter5.databinding.ActivityLoginBinding
+import com.example.challengechapter5.data.remote.request.auth.RegisterRequest
+import com.example.challengechapter5.databinding.ActivityRegisterBinding
 import com.example.challengechapter5.presentation.MainActivity
-import com.example.challengechapter5.presentation.auth.register.RegisterActivity
+import com.example.challengechapter5.presentation.auth.login.LoginActivity
+import com.example.challengechapter5.presentation.auth.login.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class LoginActivity : AppCompatActivity() {
+class RegisterActivity : AppCompatActivity() {
     companion object {
         fun startActivity(context: Context) {
-            context.startActivity(Intent(context, LoginActivity::class.java))
+            context.startActivity(Intent(context, RegisterActivity::class.java))
         }
     }
-    private lateinit var binding: ActivityLoginBinding
-    private val viewModel: LoginViewModel by viewModels()
+    private lateinit var binding: ActivityRegisterBinding
+    private val viewModel: RegisterViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityLoginBinding.inflate(layoutInflater)
+        binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         observeLiveData()
@@ -35,39 +35,48 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun observeLiveData(){
-        viewModel.openHomePage.observe(this, ::handleOpenHomePage)
+        viewModel.openLoginPage.observe(this, ::handleOpenLoginPage)
         viewModel.error.observe(this, ::handleError)
     }
 
     private fun bindView() {
-        binding.btnLogin.setOnClickListener{ handleValidation() }
-        binding.tvRegister.setOnClickListener{ RegisterActivity.startActivity(this) }
+        binding.btnRegister.setOnClickListener{ handleValidation() }
     }
 
-    private fun handleOpenHomePage(isLoggedIn: Boolean){
-        if(isLoggedIn){
-            MainActivity.startActivity(this)
+    private fun handleOpenLoginPage(isOpen: Boolean){
+        if(isOpen){
+            LoginActivity.startActivity(this)
         }
     }
 
     private fun handleError(error: String?){
+        binding.tilName.error = error
         binding.tilEmail.error = error
         binding.tilPassword.error = error
     }
 
     private fun handleValidation(){
+        val fullName = binding.etName.text.toString()
         val email = binding.etEmail.text.toString()
         val password = binding.etPassword.text.toString()
-        if (validator(email, password)){
-            val request = LoginRequest(email, password)
-            viewModel.userLogin(request)
+        if (validator(fullName, email, password)){
+            val request = RegisterRequest(fullName, email, password)
+            viewModel.userRegister(request)
         }
     }
 
-    private fun validator(email: String, password: String): Boolean {
+    private fun validator(
+        fullName: String,
+        email: String,
+        password: String
+    ): Boolean {
         resetErrors()
 
         return when {
+            fullName.isEmpty() -> {
+                binding.tilName.error = "Name cannot be empty"
+                false
+            }
             email.isEmpty() -> {
                 binding.tilEmail.error = "Email cannot be empty"
                 false

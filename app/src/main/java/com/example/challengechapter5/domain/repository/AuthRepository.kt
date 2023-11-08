@@ -15,9 +15,7 @@ interface AuthRepository {
 
     suspend fun userRegister(request: RegisterRequest): RegisterResponse
 
-    suspend fun getDataUser(token: String): Response<GetUserResponse>
-
-    suspend fun getDataUser2(token: String): GetUserResponse
+    suspend fun getDataUser(token: String): GetUserResponse
 
     suspend fun updateDataUser(
         token: String,
