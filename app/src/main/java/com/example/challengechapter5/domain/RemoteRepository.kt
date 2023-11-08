@@ -40,11 +40,7 @@ class RemoteRepository @Inject constructor(
         return api.register(request)
     }
 
-    override suspend fun getDataUser(token: String): Response<GetUserResponse> {
-        return api.getUser(token = "Bearer $token")
-    }
-
-    override suspend fun getDataUser2(token: String): GetUserResponse {
+    override suspend fun getDataUser(token: String): GetUserResponse {
         return api.getUser2(token = "Bearer $token")
     }
 

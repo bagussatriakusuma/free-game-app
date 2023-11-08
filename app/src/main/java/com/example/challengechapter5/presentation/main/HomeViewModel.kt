@@ -27,29 +27,11 @@ class HomeViewModel @Inject constructor(
     private val _error = MutableLiveData<String?>()
     val error: LiveData<String?> = _error
 
-    private val showUser2: MutableLiveData<GetUserResponse> = MutableLiveData()
-    private val showError: MutableLiveData<String> = MutableLiveData()
-
-    fun getDataUser1(){
-        viewModelScope.launch(Dispatchers.IO) {
-            val result = authRepository.getDataUser(token = tokenRepository.getToken()!!)
-            withContext(Dispatchers.Main){
-                if (result.isSuccessful){
-                    val data = result.body()
-                    showUser2.postValue(data!!)
-                }else{
-                    val data = result.errorBody()
-                    showError.postValue(data.toString())
-                }
-            }
-        }
-    }
-
-    fun getDataUser2() {
+    fun getDataUser() {
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 withContext(Dispatchers.Main) {
-                    val result = authRepository.getDataUser2(token = tokenRepository.getToken()!!)
+                    val result = authRepository.getDataUser(token = tokenRepository.getToken()!!)
                     _showUser.value = result
                 }
             }catch (e: Exception) {

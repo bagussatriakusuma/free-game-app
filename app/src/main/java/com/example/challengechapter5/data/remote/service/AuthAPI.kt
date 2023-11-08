@@ -29,11 +29,6 @@ interface AuthAPI {
     ): RegisterResponse
 
     @GET("auth/user")
-    suspend fun getUser(
-        @Header("Authorization")token: String
-    ): Response<GetUserResponse>
-
-    @GET("auth/user")
     suspend fun getUser2(
         @Header("Authorization")token: String
     ): GetUserResponse
