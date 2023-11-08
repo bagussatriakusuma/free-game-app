@@ -76,6 +76,15 @@ dependencies {
 
     // Datastore
     implementation("androidx.datastore:datastore-preferences:1.0.0")
+
+    // Glide
+    implementation("com.github.bumptech.glide:glide:4.16.0")
+
+    // Avatar Image Generator
+    implementation("com.github.amoskorir:avatarimagegenerator:1.5.0")
+
+    // SplashScreen
+    implementation("androidx.core:core-splashscreen:1.0.1")
 }
 
 kapt {

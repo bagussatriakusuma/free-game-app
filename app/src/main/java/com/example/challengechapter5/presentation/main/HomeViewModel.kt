@@ -21,13 +21,16 @@ class HomeViewModel @Inject constructor(
     private val _showUser = MutableLiveData<GetUserResponse>()
     val showUser: LiveData<GetUserResponse> = _showUser
 
+    private val _openLoginPage = MutableLiveData<Boolean>()
+    val openLoginPage: LiveData<Boolean> = _openLoginPage
+
     private val _error = MutableLiveData<String?>()
     val error: LiveData<String?> = _error
 
     private val showUser2: MutableLiveData<GetUserResponse> = MutableLiveData()
     private val showError: MutableLiveData<String> = MutableLiveData()
 
-    fun getUserData1(){
+    fun getDataUser1(){
         viewModelScope.launch(Dispatchers.IO) {
             val result = authRepository.getDataUser(token = tokenRepository.getToken()!!)
             withContext(Dispatchers.Main){
@@ -42,15 +45,30 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    fun getUserData2() {
+    fun getDataUser2() {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val result = authRepository.getDataUser2(token = tokenRepository.getToken()!!)
                 withContext(Dispatchers.Main) {
+                    val result = authRepository.getDataUser2(token = tokenRepository.getToken()!!)
                     _showUser.value = result
                 }
             }catch (e: Exception) {
                 withContext(Dispatchers.Main) {
+                    _error.value = e.message
+                }
+            }
+        }
+    }
+
+    fun clearDataUser(){
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                tokenRepository.clearToken()
+                withContext(Dispatchers.Main) {
+                    _openLoginPage.value = true
+                }
+            }catch (e: Exception) {
+                withContext(Dispatchers.Main){
                     _error.value = e.message
                 }
             }

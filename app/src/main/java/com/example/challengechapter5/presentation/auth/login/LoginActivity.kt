@@ -1,56 +1,50 @@
 package com.example.challengechapter5.presentation.auth.login
 
+import android.content.Context
+import android.content.Intent
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Editable
 import android.util.Patterns
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.core.widget.doAfterTextChanged
-import androidx.core.widget.doOnTextChanged
-import androidx.fragment.app.viewModels
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.fragment.findNavController
 import com.example.challengechapter5.R
 import com.example.challengechapter5.data.remote.request.auth.LoginRequest
-import com.example.challengechapter5.databinding.FragmentLoginBinding
+import com.example.challengechapter5.databinding.ActivityLoginBinding
+import com.example.challengechapter5.presentation.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
-class LoginFragment : Fragment() {
-    private lateinit var binding: FragmentLoginBinding
+class LoginActivity : AppCompatActivity() {
+    companion object {
+        fun startActivity(context: Context) {
+            context.startActivity(Intent(context, LoginActivity::class.java))
+        }
+    }
+    private lateinit var binding: ActivityLoginBinding
     private val viewModel: LoginViewModel by viewModels()
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentLoginBinding.inflate(inflater,container,false)
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = ActivityLoginBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         observeLiveData()
         bindView()
     }
 
     private fun observeLiveData(){
-        viewModel.openHomePage.observe(viewLifecycleOwner, ::handleOpenHomePage)
-        viewModel.error.observe(viewLifecycleOwner, ::handleError)
+        viewModel.openHomePage.observe(this, ::handleOpenHomePage)
+        viewModel.error.observe(this, ::handleError)
     }
 
     private fun bindView() {
         binding.btnLogin.setOnClickListener{ handleValidation() }
     }
 
-    private fun handleOpenHomePage(isOpen: Boolean){
-        if(isOpen){
-            findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+    private fun handleOpenHomePage(isLoggedIn: Boolean){
+        if(isLoggedIn){
+            MainActivity.startActivity(this)
         }
     }
 
