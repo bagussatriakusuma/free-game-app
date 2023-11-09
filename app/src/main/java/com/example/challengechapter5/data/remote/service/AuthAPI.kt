@@ -16,7 +16,7 @@ import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.PUT
 import retrofit2.http.Part
-
+    
 interface AuthAPI {
     @POST("auth/login")
     suspend fun login(
@@ -39,8 +39,6 @@ interface AuthAPI {
         @Header("Authorization")token: String,
         @Part file: MultipartBody.Part? = null,
         @Part("full_name") name: RequestBody?,
-        @Part("phone_number") phoneNumber: RequestBody?,
-        @Part("address") address: RequestBody?,
-        @Part("city") city: RequestBody?,
+        @Part("phone_number") phoneNumber: RequestBody?
     ): UpdateUserResponse
 }

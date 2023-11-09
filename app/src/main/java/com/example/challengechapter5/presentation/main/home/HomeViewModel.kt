@@ -1,4 +1,4 @@
-package com.example.challengechapter5.presentation.main
+package com.example.challengechapter5.presentation.main.home
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

@@ -48,10 +48,8 @@ class RemoteRepository @Inject constructor(
         token: String,
         image: MultipartBody.Part?,
         fullName: RequestBody?,
-        phoneNumber: RequestBody?,
-        address: RequestBody?,
-        city: RequestBody?
+        phoneNumber: RequestBody?
     ): UpdateUserResponse {
-        return api.updateUser(token = "Bearer $token", image, fullName, phoneNumber, address, city)
+        return api.updateUser(token = "Bearer $token", image, fullName, phoneNumber)
     }
 }

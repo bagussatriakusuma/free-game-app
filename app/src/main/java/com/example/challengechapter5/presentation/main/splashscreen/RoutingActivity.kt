@@ -1,4 +1,4 @@
-package com.example.challengechapter5.presentation.auth.splashscreen
+package com.example.challengechapter5.presentation.main.splashscreen
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -29,6 +29,11 @@ class RoutingActivity : AppCompatActivity() {
         viewModel.checkLoggedIn()
     }
 
+    private fun observeLiveData(){
+        viewModel.openLoginPage.observe(this, ::handleOpenLoginPage)
+        viewModel.openHomePage.observe(this, ::handleOpenHomePage)
+    }
+
     private fun startToNextActivity(isLoggedIn: Boolean){
         if (isLoggedIn) {
             MainActivity.startActivity(this)
@@ -36,11 +41,6 @@ class RoutingActivity : AppCompatActivity() {
             LoginActivity.startActivity(this)
         }
         finish()
-    }
-
-    private fun observeLiveData(){
-        viewModel.openLoginPage.observe(this, ::handleOpenLoginPage)
-        viewModel.openHomePage.observe(this, ::handleOpenHomePage)
     }
 
     private fun handleOpenHomePage(isLoggedIn: Boolean) {

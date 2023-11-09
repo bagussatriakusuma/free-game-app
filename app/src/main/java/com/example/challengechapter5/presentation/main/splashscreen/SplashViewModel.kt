@@ -1,4 +1,4 @@
-package com.example.challengechapter5.presentation.auth.splashscreen
+package com.example.challengechapter5.presentation.main.splashscreen
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
