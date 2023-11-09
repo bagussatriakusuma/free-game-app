@@ -85,6 +85,9 @@ dependencies {
 
     // SplashScreen
     implementation("androidx.core:core-splashscreen:1.0.1")
+
+    // Image Picker
+    implementation("com.github.dhaval2404:imagepicker:2.1")
 }
 
 kapt {

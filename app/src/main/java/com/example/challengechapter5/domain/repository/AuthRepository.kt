@@ -21,8 +21,6 @@ interface AuthRepository {
         token: String,
         image: MultipartBody.Part?,
         fullName: RequestBody?,
-        phoneNumber: RequestBody?,
-        address: RequestBody?,
-        city: RequestBody?
+        phoneNumber: RequestBody?
     ): UpdateUserResponse
 }

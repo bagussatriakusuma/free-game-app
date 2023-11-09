@@ -22,7 +22,7 @@
             android:name=".presentation.auth.login.LoginActivity"
             android:exported="false"></activity>
         <activity
-            android:name=".presentation.auth.splashscreen.RoutingActivity"
+            android:name=".presentation.main.splashscreen.RoutingActivity"
             android:exported="true"
             android:theme="@style/Theme.App.Splash">
             <intent-filter>
