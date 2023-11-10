@@ -53,8 +53,8 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
     // Jetpack Navigation Components
-    implementation("androidx.navigation:navigation-fragment-ktx:2.4.2")
-    implementation("androidx.navigation:navigation-ui-ktx:2.4.2")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.7.5")
+    implementation("androidx.navigation:navigation-ui-ktx:2.7.5")
     implementation("com.makeramen:roundedimageview:2.3.0")
 
     // Kotlin Couroutines
@@ -76,6 +76,21 @@ dependencies {
 
     // Datastore
     implementation("androidx.datastore:datastore-preferences:1.0.0")
+
+    // Glide
+    implementation("com.github.bumptech.glide:glide:4.16.0")
+
+    // Avatar Image Generator
+    implementation("com.github.amoskorir:avatarimagegenerator:1.5.0")
+
+    // SplashScreen
+    implementation("androidx.core:core-splashscreen:1.0.1")
+
+    // Image Picker
+    implementation("com.github.dhaval2404:imagepicker:2.1")
+
+    // Image Slider
+    implementation("com.github.denzcoskun:ImageSlideshow:0.1.2")
 }
 
 kapt {

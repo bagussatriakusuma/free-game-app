@@ -1,6 +1,7 @@
 package com.example.challengechapter5.di
 
 import com.example.challengechapter5.data.remote.service.AuthAPI
+import com.example.challengechapter5.data.remote.service.MainAPI
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,8 +17,10 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 class NetworkModule {
     companion object{
-        const val BASE_URL = "https://fp-fsw-backend.vercel.app/api/"
+        const val BASE_URL = "https://easy-school-uniform-ant.cyclic.app/api/v1/"
+        const val BASE_URL_MAIN = "https://www.freetogame.com/api/"
         const val RETROFIT_AUTH = "RetrofitAuth"
+        const val RETROFIT_MAIN = "RetrofitMain"
     }
 
     @Singleton
@@ -50,7 +53,24 @@ class NetworkModule {
 
     @Singleton
     @Provides
+    @Named(RETROFIT_MAIN)
+    fun provideRetrofitMain(client: OkHttpClient) : Retrofit {
+        return Retrofit.Builder()
+            .baseUrl(BASE_URL_MAIN)
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(client)
+            .build()
+    }
+
+    @Singleton
+    @Provides
     fun provideAuthAPI(@Named(RETROFIT_AUTH) retrofit: Retrofit) : AuthAPI {
         return retrofit.create(AuthAPI::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideMainAPI(@Named(RETROFIT_MAIN) retrofit: Retrofit) : MainAPI {
+        return retrofit.create(MainAPI::class.java)
     }
 }
