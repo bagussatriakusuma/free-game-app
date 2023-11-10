@@ -15,6 +15,10 @@ and also i might add more feature in the next challenge chapter.
 - `Image picker` -> open image or camera
 - `Image slider` -> make image slideeeee
 
+## Design concept🎨
+
+![concept design](https://github.com/bagussatriakusuma/free-game-app/assets/96243284/f396dc80-8a70-4087-9276-0a70c0ad1503)
+
 ## Preview👀
 
 https://github.com/bagussatriakusuma/free-game-app/assets/96243284/2bd59e45-be01-4545-894a-4c8c50969ec0
