@@ -1,14 +1,18 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.ChallengeChapter5" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Base.Theme.ChallengeChapter5" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
+        <item name="colorPrimary">@color/primary_color</item>
         <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="android:statusBarColor">@color/background_color</item>
+        <item name="android:navigationBarColor">@color/background_color</item>
+        <item name="android:windowLightStatusBar">false</item>
     </style>
 
     <style name="Theme.ChallengeChapter5" parent="Base.Theme.ChallengeChapter5" />
 
     <style name="LoginTextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
-        <item name="boxStrokeColor">@color/color_main</item>
+        <item name="boxStrokeColor">@color/primary_color</item>
         <item name="android:textSize">16sp</item>
         <item name="fontFamily">@font/poppinsregular</item>
         <item name="android:textColorHint">#999999</item>

@@ -32,7 +32,7 @@ class LoginViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 val result = authRepository.userLogin(request)
-                val token = result.accessToken.orEmpty()
+                val token = result.data?.token.orEmpty()
                 insertToken(token = token)
                 withContext(Dispatchers.Main) {
                     _openHomePage.value = true

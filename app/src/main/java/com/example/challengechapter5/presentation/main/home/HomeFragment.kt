@@ -9,16 +9,28 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.avatarfirst.avatargenlib.AvatarGenerator
 import com.bumptech.glide.Glide
+import com.denzcoskun.imageslider.constants.ScaleTypes
+import com.denzcoskun.imageslider.models.SlideModel
 import com.example.challengechapter5.R
 import com.example.challengechapter5.data.remote.response.auth.GetUserResponse
+import com.example.challengechapter5.data.remote.response.main.GetAllGamesResponse
 import com.example.challengechapter5.databinding.FragmentHomeBinding
 import com.example.challengechapter5.presentation.auth.login.LoginActivity
+import com.example.challengechapter5.presentation.main.home.adapter.PopularMobaGameAdapter
+import com.example.challengechapter5.presentation.main.home.adapter.PopularRacingGameAdapter
+import com.example.challengechapter5.presentation.main.home.adapter.RecommendedGameAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
+    companion object {
+        const val GAME_ID = "id"
+    }
     private lateinit var binding: FragmentHomeBinding
     private val viewModel: HomeViewModel by viewModels()
+    private lateinit var recommendedGameAdapter: RecommendedGameAdapter
+    private lateinit var popularMobaGameAdapter: PopularMobaGameAdapter
+    private lateinit var popularRacingGameAdapter: PopularRacingGameAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,42 +42,70 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.getDataUser()
+        viewModel.recommendedGames()
+        viewModel.popularMobaGames()
+        viewModel.popularRacingGames()
+
         observeLiveData()
-        bindView()
+        bindAdapter()
+        provideDataImageSlider()
     }
 
     private fun observeLiveData(){
-        viewModel.showUser.observe(viewLifecycleOwner, ::handleShowUser)
-        viewModel.openLoginPage.observe(viewLifecycleOwner, ::handleOpenLoginPage)
+        viewModel.showRecommendedGames.observe(viewLifecycleOwner, ::handleDataRecommendedGames)
+        viewModel.showPopularMobaGames.observe(viewLifecycleOwner, ::handleDataPopularMobaGames)
+        viewModel.showPopularRacingGames.observe(viewLifecycleOwner, ::handleDataPopularRacingGames)
+
+    }
+    private fun bindAdapter(){
+        recommendedGameAdapter = RecommendedGameAdapter(object : RecommendedGameAdapter.OnClickListener {
+            override fun onClickItem(data: GetAllGamesResponse) {
+                val bundle = Bundle()
+                bundle.putInt(GAME_ID, data.id.hashCode())
+                findNavController().navigate(R.id.action_homeFragment_to_detailGameFragment, bundle)
+            }
+        })
+        binding.rvRecommendedGames.adapter = recommendedGameAdapter
+
+        popularMobaGameAdapter = PopularMobaGameAdapter(object : PopularMobaGameAdapter.OnClickListener {
+            override fun onClickItem(data: GetAllGamesResponse) {
+                val bundle = Bundle()
+                bundle.putInt(GAME_ID, data.id.hashCode())
+                findNavController().navigate(R.id.action_homeFragment_to_detailGameFragment, bundle)
+            }
+        })
+        binding.rvPopularMobaGames.adapter = popularMobaGameAdapter
+
+        popularRacingGameAdapter = PopularRacingGameAdapter(object : PopularRacingGameAdapter.OnClickListener {
+            override fun onClickItem(data: GetAllGamesResponse) {
+                val bundle = Bundle()
+                bundle.putInt(GAME_ID, data.id.hashCode())
+                findNavController().navigate(R.id.action_homeFragment_to_detailGameFragment, bundle)
+            }
+        })
+        binding.rvPopularRacingGames.adapter = popularRacingGameAdapter
     }
 
-    private fun bindView(){
-        binding.btnLogout.setOnClickListener { viewModel.clearDataUser() }
-        binding.ivUser.setOnClickListener{ handleOpenProfilePage() }
+    private fun handleDataRecommendedGames(recommendedGames: List<GetAllGamesResponse>) {
+        recommendedGameAdapter.submitData(recommendedGames)
     }
 
-    private fun handleShowUser(user: GetUserResponse?) {
-        Glide.with(requireContext())
-            .load(user?.imageUrl.toString())
-            .placeholder(
-                AvatarGenerator.AvatarBuilder(requireContext())
-                    .setTextSize(50)
-                    .setAvatarSize(200)
-                    .toSquare()
-                    .setLabel(user?.fullName.toString())
-                    .build()
-            )
-            .into(binding.ivUser)
+    private fun handleDataPopularMobaGames(popularMobaGames: List<GetAllGamesResponse>) {
+        popularMobaGameAdapter.submitData(popularMobaGames)
     }
 
-    private fun handleOpenLoginPage(isLoggedOut: Boolean) {
-        if(isLoggedOut){
-            LoginActivity.startActivity(requireContext())
-        }
+    private fun handleDataPopularRacingGames(popularRacingGames: List<GetAllGamesResponse>) {
+        popularRacingGameAdapter.submitData(popularRacingGames)
     }
 
-    private fun handleOpenProfilePage(){
-        findNavController().navigate(R.id.action_homeFragment_to_profileFragment)
+    private fun provideDataImageSlider() {
+        val imageSlider = binding.imageSlider
+        val imageList = ArrayList<SlideModel>()
+
+        imageList.add(SlideModel(R.drawable.the_finals))
+        imageList.add(SlideModel(R.drawable.cs2))
+        imageList.add(SlideModel(R.drawable.apex_legends))
+
+        imageSlider.setImageList(imageList, ScaleTypes.CENTER_CROP)
     }
 }

@@ -29,7 +29,7 @@ interface AuthAPI {
     ): RegisterResponse
 
     @GET("auth/user")
-    suspend fun getUser2(
+    suspend fun getUser(
         @Header("Authorization")token: String
     ): GetUserResponse
 
@@ -38,7 +38,9 @@ interface AuthAPI {
     suspend fun updateUser(
         @Header("Authorization")token: String,
         @Part file: MultipartBody.Part? = null,
-        @Part("full_name") name: RequestBody?,
-        @Part("phone_number") phoneNumber: RequestBody?
+        @Part("name") name: RequestBody?,
+        @Part("phone_number") phoneNumber: RequestBody?,
+        @Part("city") city: RequestBody?,
+        @Part("address") address: RequestBody?
     ): UpdateUserResponse
 }

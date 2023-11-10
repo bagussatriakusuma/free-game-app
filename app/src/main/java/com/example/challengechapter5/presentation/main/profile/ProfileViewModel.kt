@@ -32,38 +32,47 @@ class ProfileViewModel @Inject constructor(
     private val _showUser = MutableLiveData<GetUserResponse>()
     val showUser: LiveData<GetUserResponse> = _showUser
 
+    private val _openLoginPage = MutableLiveData<Boolean>()
+    val openLoginPage: LiveData<Boolean> = _openLoginPage
+
     private val _error = MutableLiveData<String?>()
     val error: LiveData<String?> = _error
 
     fun updateDataUser(
-        image: File?,
+        picture: File?,
         name: String,
-        phoneNumber: String
-    ){
-        val requestFile = image?.let { reduceFileImage(it).asRequestBody("image/jpg".toMediaTypeOrNull()) }
-        val imageRequest =
-            requestFile?.let { MultipartBody.Part.createFormData("image", image.name, it) }
+        phoneNumber: String,
+        city: String,
+        address: String
+    ) {
+        val requestFile = picture?.let { reduceFileImage(it).asRequestBody("image/jpg".toMediaTypeOrNull()) }
+        val imagePart = requestFile?.let { MultipartBody.Part.createFormData("picture", picture.name, it) }
         val nameRequest = name.toRequestBody("text/plain".toMediaType())
         val phoneNumberRequest = phoneNumber.toRequestBody("text/plain".toMediaType())
+        val cityRequest = city.toRequestBody("text/plain".toMediaType())
+        val addressRequest = address.toRequestBody("text/plain".toMediaType())
 
-        viewModelScope.launch(Dispatchers.Main){
+        viewModelScope.launch(Dispatchers.Main) {
             try {
                 authRepository.updateDataUser(
                     token = tokenRepository.getToken()!!,
-                    imageRequest,
-                    nameRequest,
-                    phoneNumberRequest
+                    picture = imagePart,
+                    name = nameRequest,
+                    phoneNumber = phoneNumberRequest,
+                    city = cityRequest,
+                    address = addressRequest
                 )
                 withContext(Dispatchers.Main) {
                     _editProfile.value = true
                 }
-            }catch (e: Exception){
-                withContext(Dispatchers.Main){
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
                     _error.value = e.message
                 }
             }
         }
     }
+
 
     fun getDataUser() {
         viewModelScope.launch(Dispatchers.IO) {
@@ -74,6 +83,21 @@ class ProfileViewModel @Inject constructor(
                 }
             }catch (e: Exception) {
                 withContext(Dispatchers.Main) {
+                    _error.value = e.message
+                }
+            }
+        }
+    }
+
+    fun clearDataUser(){
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                tokenRepository.clearToken()
+                withContext(Dispatchers.Main) {
+                    _openLoginPage.value = true
+                }
+            }catch (e: Exception) {
+                withContext(Dispatchers.Main){
                     _error.value = e.message
                 }
             }

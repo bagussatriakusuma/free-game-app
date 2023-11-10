@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".presentation.main.detail.DetailGameFragment"
+    android:orientation="vertical"
+    android:background="@color/background_color">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:layout_width="match_parent"
+        android:layout_height="56dp">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/container_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_back"
+                android:layout_marginEnd="6dp"
+                android:layout_gravity="center_vertical"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/back"
+                android:textColor="@color/heading_color"
+                android:textSize="@dimen/text_button"
+                android:fontFamily="@font/plusjakartasans_medium"
+                android:includeFontPadding="false"/>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </com.google.android.material.appbar.MaterialToolbar>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_thumbnail"
+                android:layout_width="match_parent"
+                android:layout_height="240dp"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_screenshots"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:orientation="horizontal"
+                tools:listitem="@layout/list_item_screenshots"
+                android:clipToPadding="false"
+                android:layout_marginTop="12dp"
+                android:paddingHorizontal="12dp"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="game title"
+                android:textSize="28sp"
+                android:textColor="@color/white"
+                android:fontFamily="@font/plusjakartasans_extrabold"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"/>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="12dp">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:elevation="0dp"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardElevation="0dp"
+                    android:backgroundTint="@color/card_additional_color"
+                    android:layout_marginStart="16dp"
+                    app:cardCornerRadius="10dp"
+                    app:strokeColor="@color/card_additional_stroke_color"
+                    app:layout_constraintEnd_toEndOf="@+id/iv_thumbnail"
+                    app:layout_constraintTop_toTopOf="@+id/iv_thumbnail">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tv_genre"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="genre"
+                        android:textColor="@color/white"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/plusjakartasans_medium"
+                        android:includeFontPadding="false"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginVertical="14dp"/>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:elevation="0dp"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardElevation="0dp"
+                    android:backgroundTint="@color/card_additional_color"
+                    android:layout_marginStart="10dp"
+                    app:cardCornerRadius="10dp"
+                    app:strokeColor="@color/card_additional_stroke_color"
+                    app:layout_constraintEnd_toEndOf="@+id/iv_thumbnail"
+                    app:layout_constraintTop_toTopOf="@+id/iv_thumbnail">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tv_platform"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="platform"
+                        android:textColor="@color/white"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/plusjakartasans_medium"
+                        android:includeFontPadding="false"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginVertical="14dp"/>
+
+                </com.google.android.material.card.MaterialCardView>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Lorem ipsum dolor sit amet consectetur. Et convallis faucibus nunc vitae sed posuere. Eget tortor adipiscing tristique vitae in ut a volutpat. Amet quis ut tempus lobortis a. Netus egestas netus enim quis enim gravida."
+                android:maxLines="5"
+                android:ellipsize="end"
+                android:textColor="@color/subtitle_color"
+                android:fontFamily="@font/plusjakartasans_regular"
+                android:textSize="16sp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="12dp"
+                android:letterSpacing="0.04"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Additional information"
+                android:textSize="16sp"
+                android:textColor="@color/white"
+                android:fontFamily="@font/plusjakartasans_semibold"
+                android:letterSpacing="0.04"
+                android:layout_marginTop="24dp"
+                android:layout_marginStart="16dp"/>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="12dp">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:elevation="0dp"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardElevation="0dp"
+                    android:backgroundTint="@color/card_additional_color"
+                    android:layout_marginStart="16dp"
+                    app:cardCornerRadius="10dp"
+                    app:strokeColor="@color/card_additional_stroke_color"
+                    android:layout_weight="1"
+                    android:paddingHorizontal="16dp"
+                    app:layout_constraintEnd_toEndOf="@+id/iv_thumbnail"
+                    app:layout_constraintTop_toTopOf="@+id/iv_thumbnail">
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:paddingHorizontal="16dp">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/publisher"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Publisher"
+                            android:textColor="@color/subtitle_color"
+                            android:textSize="14sp"
+                            android:fontFamily="@font/plusjakartasans_medium"
+                            android:includeFontPadding="false"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="18dp"/>
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tv_publisher"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="platform .inc"
+                            android:textColor="@color/white"
+                            android:textSize="14sp"
+                            android:maxLines="1"
+                            android:ellipsize="end"
+                            android:fontFamily="@font/plusjakartasans_medium"
+                            android:includeFontPadding="false"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginBottom="18dp"
+                            android:layout_gravity="center"/>
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:elevation="0dp"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardElevation="0dp"
+                    android:backgroundTint="@color/card_additional_color"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="16dp"
+                    app:cardCornerRadius="10dp"
+                    app:strokeColor="@color/card_additional_stroke_color"
+                    android:layout_weight="1"
+                    android:paddingHorizontal="16dp"
+                    app:layout_constraintEnd_toEndOf="@+id/iv_thumbnail"
+                    app:layout_constraintTop_toTopOf="@+id/iv_thumbnail">
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:paddingHorizontal="16dp">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/developer"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Developer"
+                            android:textColor="@color/subtitle_color"
+                            android:textSize="14sp"
+                            android:fontFamily="@font/plusjakartasans_medium"
+                            android:includeFontPadding="false"
+                            android:layout_gravity="center"
+                            android:maxLines="1"
+                            android:layout_marginTop="18dp"/>
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tv_developer"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="developer team"
+                            android:textColor="@color/white"
+                            android:textSize="14sp"
+                            android:fontFamily="@font/plusjakartasans_medium"
+                            android:includeFontPadding="false"
+                            android:maxLines="1"
+                            android:ellipsize="end"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginBottom="18dp"
+                            android:layout_gravity="center"/>
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                </com.google.android.material.card.MaterialCardView>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="40dp">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:elevation="0dp"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardElevation="0dp"
+                    android:backgroundTint="@color/card_additional_color"
+                    android:layout_marginStart="16dp"
+                    app:cardCornerRadius="10dp"
+                    app:strokeColor="@color/card_additional_stroke_color"
+                    android:layout_weight="1"
+                    android:paddingHorizontal="16dp"
+                    app:layout_constraintEnd_toEndOf="@+id/iv_thumbnail"
+                    app:layout_constraintTop_toTopOf="@+id/iv_thumbnail">
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/releaseDate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Release date"
+                            android:textColor="@color/subtitle_color"
+                            android:textSize="14sp"
+                            android:fontFamily="@font/plusjakartasans_medium"
+                            android:includeFontPadding="false"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="18dp"/>
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tv_releaseDate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="month date, year"
+                            android:textColor="@color/white"
+                            android:textSize="14sp"
+                            android:fontFamily="@font/plusjakartasans_medium"
+                            android:includeFontPadding="false"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginBottom="18dp"
+                            android:layout_gravity="center"/>
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:elevation="0dp"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardElevation="0dp"
+                    android:backgroundTint="@color/card_additional_color"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="16dp"
+                    app:cardCornerRadius="10dp"
+                    app:strokeColor="@color/card_additional_stroke_color"
+                    android:layout_weight="1"
+                    android:paddingHorizontal="16dp"
+                    app:layout_constraintEnd_toEndOf="@+id/iv_thumbnail"
+                    app:layout_constraintTop_toTopOf="@+id/iv_thumbnail">
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/status"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Status"
+                            android:textColor="@color/subtitle_color"
+                            android:textSize="14sp"
+                            android:fontFamily="@font/plusjakartasans_medium"
+                            android:includeFontPadding="false"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="18dp"/>
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tv_status"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="status"
+                            android:textColor="@color/white"
+                            android:textSize="14sp"
+                            android:fontFamily="@font/plusjakartasans_medium"
+                            android:includeFontPadding="false"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginBottom="18dp"
+                            android:layout_gravity="center"/>
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                </com.google.android.material.card.MaterialCardView>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.appcompat.widget.LinearLayoutCompat>

@@ -2,4 +2,34 @@
     <string name="app_name">Challenge Chapter 5</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="heading_login">Welcome back</string>
+    <string name="heading_register">Create your account</string>
+    <string name="subheading_login">You’ve been missed. You can login first to get a lot of free game informations!</string>
+    <string name="subheading_register">Let\’s make a new account for you to get a lot of free game informations!</string>
+    <string name="title_email">Email</string>
+    <string name="title_password">Password</string>
+    <string name="title_username">Username</string>
+    <string name="text_button_login">Login</string>
+    <string name="text_button_Register">Register</string>
+    <string name="go_to_register1">Don\'t have an account?</string>
+    <string name="go_to_register2">Register here</string>
+    <string name="hint_email">freetogame@mail.com</string>
+    <string name="hint_password">********</string>
+    <string name="hint_username">ex: freetogame</string>
+    <string name="back">Back</string>
+    <string name="featured_recommended"><![CDATA[featured & Recommended]]></string>
+    <string name="popular_moba_games">popular moba games</string>
+    <string name="popular_racing_games">popular racing games</string>
+    <string name="bottom_nav_home">Home</string>
+    <string name="bottom_nav_feed">Feed</string>
+    <string name="bottom_nav_bookmark">Bookmark</string>
+    <string name="bottom_nav_profile">Profile</string>
+    <string name="update">Update</string>
+    <string name="change_profile_picture">change profile picture</string>
+    <string name="phone_number">Phone number</string>
+    <string name="city">City</string>
+    <string name="hint_city">Your city</string>
+    <string name="address">Address</string>
+    <string name="hint_address">Your address</string>
+    <string name="logout">Logout</string>
 </resources>

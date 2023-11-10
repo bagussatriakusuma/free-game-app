@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="heading1">32sp</dimen>
+    <dimen name="subtitle1">16sp</dimen>
+    <dimen name="subtitle3">14sp</dimen>
+    <dimen name="text_button">20sp</dimen>
+    <dimen name="corner_edit_text">10sp</dimen>
+</resources>

@@ -41,6 +41,7 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun bindView() {
         binding.btnRegister.setOnClickListener{ handleValidation() }
+        binding.containerBack.setOnClickListener { LoginActivity.startActivity(this) }
     }
 
     private fun handleOpenLoginPage(isOpen: Boolean){
@@ -56,11 +57,11 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun handleValidation(){
-        val fullName = binding.etName.text.toString()
+        val name = binding.etName.text.toString()
         val email = binding.etEmail.text.toString()
         val password = binding.etPassword.text.toString()
-        if (validator(fullName, email, password)){
-            val request = RegisterRequest(fullName, email, password)
+        if (validator(name, email, password)){
+            val request = RegisterRequest(name, email, password)
             viewModel.userRegister(request)
         }
     }
@@ -89,14 +90,19 @@ class RegisterActivity : AppCompatActivity() {
                 binding.tilPassword.error = "Password cannot be empty"
                 false
             }
-            password.length < 8 -> {
-                binding.tilPassword.error = "Your password is less than 8 characters"
+            password.length < 8 || !isPasswordValid(password) -> {
+                binding.tilPassword.error = "Password must contain at least 8 characters long, one number, one uppercase, one lowercase letter and one special character"
                 false
             }
             else -> {
                 true
             }
         }
+    }
+
+    private fun isPasswordValid(password: String): Boolean {
+        val passwordPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#\$%^&*()_+\\-=\\[\\]{};':\",.<>?])(?=\\S+\$).{8,}\$".toRegex()
+        return passwordPattern.matches(password)
     }
 
     private fun resetErrors() {

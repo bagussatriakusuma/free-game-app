@@ -3,9 +3,11 @@ package com.example.challengechapter5.di
 import android.app.Application
 import android.content.Context
 import com.example.challengechapter5.data.remote.service.AuthAPI
+import com.example.challengechapter5.data.remote.service.MainAPI
 import com.example.challengechapter5.datastore.DatastoreManager
 import com.example.challengechapter5.domain.RemoteRepository
 import com.example.challengechapter5.domain.repository.AuthRepository
+import com.example.challengechapter5.domain.repository.MainRepository
 import com.example.challengechapter5.domain.repository.TokenRepository
 import dagger.Module
 import dagger.Provides
@@ -26,11 +28,13 @@ class AppModule {
     @Provides
     fun provideRemoteRepository(
         datastore: DatastoreManager,
-        api: AuthAPI
+        apiAuth: AuthAPI,
+        apiMain: MainAPI
     ): RemoteRepository {
         return RemoteRepository(
             datastore = datastore,
-            api = api
+            apiAuth = apiAuth,
+            apiMain = apiMain
         )
     }
 
@@ -43,6 +47,12 @@ class AppModule {
     @Singleton
     @Provides
     fun provideTokenRepository(remoteRepository: RemoteRepository): TokenRepository {
+        return remoteRepository
+    }
+
+    @Singleton
+    @Provides
+    fun provideMainRepository(remoteRepository: RemoteRepository): MainRepository {
         return remoteRepository
     }
 }

@@ -60,3 +60,28 @@ private fun createTempFile(context: Context): File {
     val storageDir: File? = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
     return File.createTempFile(timeStamp, ".jpg", storageDir)
 }
+
+fun convertDate(date: String): String {
+    val year = date.take(4)
+    var kotlin = date.drop(5)
+    val month = when (kotlin.take(2)) {
+        "01" -> "January"
+        "02" -> "February"
+        "03" -> "March"
+        "04" -> "April"
+        "05" -> "May"
+        "06" -> "June"
+        "07" -> "July"
+        "08" -> "August"
+        "09" -> "September"
+        "10" -> "October"
+        "11" -> "November"
+        "12" -> "December"
+        else -> ""
+    }
+
+    val day = kotlin.drop(3).take(2)
+    kotlin = kotlin.drop(3)
+
+    return "$month $day, $year"
+}

@@ -19,8 +19,10 @@ interface AuthRepository {
 
     suspend fun updateDataUser(
         token: String,
-        image: MultipartBody.Part?,
-        fullName: RequestBody?,
-        phoneNumber: RequestBody?
+        picture: MultipartBody.Part?,
+        name: RequestBody?,
+        phoneNumber: RequestBody?,
+        city: RequestBody?,
+        address: RequestBody?
     ): UpdateUserResponse
 }

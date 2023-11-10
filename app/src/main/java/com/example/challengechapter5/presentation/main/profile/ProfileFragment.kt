@@ -21,6 +21,7 @@ import com.example.challengechapter5.R
 import com.example.challengechapter5.data.remote.request.auth.LoginRequest
 import com.example.challengechapter5.data.remote.response.auth.GetUserResponse
 import com.example.challengechapter5.databinding.FragmentProfileBinding
+import com.example.challengechapter5.presentation.auth.login.LoginActivity
 import com.example.challengechapter5.utils.uriToFile
 import com.github.dhaval2404.imagepicker.ImagePicker
 import dagger.hilt.android.AndroidEntryPoint
@@ -50,35 +51,53 @@ class ProfileFragment : Fragment() {
 
     private fun observeLiveData(){
         viewModel.showUser.observe(viewLifecycleOwner, ::handleShowUser)
+        viewModel.openLoginPage.observe(viewLifecycleOwner, ::handleOpenLoginPage)
     }
 
     private fun bindView(){
-        binding.ivUser.setOnClickListener { openImagePicker() }
+        binding.tvChangeProfilePicture.setOnClickListener { openImagePicker() }
         binding.btnUpdate.setOnClickListener { handleValidation() }
+        binding.containerBack.setOnClickListener { findNavController().popBackStack() }
+        binding.btnLogout.setOnClickListener { viewModel.clearDataUser() }
     }
 
     private fun handleShowUser(user: GetUserResponse?) {
         Glide.with(requireContext())
-            .load(user?.imageUrl.toString())
+            .load(user?.data?.picture.toString())
             .placeholder(
                 AvatarGenerator.AvatarBuilder(requireContext())
                     .setTextSize(50)
                     .setAvatarSize(200)
                     .toSquare()
-                    .setLabel(user?.fullName.toString())
+                    .setLabel(user?.data?.name.toString())
                     .build()
             )
             .into(binding.ivUser)
-        binding.etName.setText(user?.fullName)
-        binding.etPhoneNumber.setText(user?.phoneNumber)
+        binding.etName.setText(user?.data?.name)
+        binding.etPhoneNumber.setText(user?.data?.phoneNumber)
+        binding.etCity.setText(user?.data?.city)
+        binding.etAddresss.setText(user?.data?.address)
     }
 
-    private fun handleValidation(){
+    private fun handleOpenLoginPage(isLoggedOut: Boolean) {
+        if(isLoggedOut){
+            LoginActivity.startActivity(requireContext())
+        }
+    }
+
+    private fun handleValidation() {
         val name = binding.etName.text.toString()
         val phoneNumber = binding.etPhoneNumber.text.toString()
-        if (validator(name, phoneNumber)){
-            viewModel.updateDataUser(fileImage, name, phoneNumber)
-            handleOpenHomePage()
+        val city = binding.etCity.text.toString()
+        val address = binding.etAddresss.text.toString()
+
+        if (validator(name, phoneNumber, city, address)) {
+            if (fileImage != null) {
+                viewModel.updateDataUser(fileImage, name, phoneNumber, city, address)
+                handleOpenHomePage()
+            } else {
+                Toast.makeText(requireContext(), "Please select an image", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
@@ -86,7 +105,7 @@ class ProfileFragment : Fragment() {
         findNavController().navigate(R.id.action_profileFragment_to_homeFragment)
     }
 
-    private fun validator(name: String, phoneNumber: String): Boolean {
+    private fun validator(name: String, phoneNumber: String, city: String, address: String): Boolean {
         resetErrors()
 
         return when {
@@ -96,6 +115,14 @@ class ProfileFragment : Fragment() {
             }
             phoneNumber.isEmpty() -> {
                 binding.tilPhoneNumber.error = "Password cannot be empty"
+                false
+            }
+            city.isEmpty() -> {
+                binding.tilPhoneNumber.error = "City cannot be empty"
+                false
+            }
+            address.isEmpty() -> {
+                binding.tilPhoneNumber.error = "Address cannot be empty"
                 false
             }
             else -> {
