@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".ChallengeChapter5"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -14,15 +15,27 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ChallengeChapter5"
         tools:targetApi="31"
-        android:name=".ChallengeChapter5">
+        android:usesCleartextTraffic="true">
         <activity
-            android:name=".presentation.MainActivity"
-            android:exported="true">
+            android:name=".presentation.auth.register.RegisterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.auth.login.LoginActivity"
+            android:exported="false">
+        </activity>
+        <activity
+            android:name=".presentation.main.splashscreen.RoutingActivity"
+            android:exported="true"
+            android:theme="@style/Theme.App.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".presentation.MainActivity"
+            android:exported="false">
         </activity>
     </application>
 

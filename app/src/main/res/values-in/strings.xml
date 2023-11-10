@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">Challenge Chapter 5</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="heading_login">Selamat datang kembali</string>
+    <string name="heading_register">Buat akun anda</string>
+    <string name="subheading_login">Anda telah terlewatkan. Anda bisa login terlebih dahulu untuk mendapatkan banyak informasi game gratis!</string>
+    <string name="subheading_register">Ayo buat akun baru untuk mendapatkan banyak informasi game gratis!</string>
+    <string name="title_email">Email</string>
+    <string name="title_password">Kata sandi</string>
+    <string name="title_username">Nama pengguna</string>
+    <string name="text_button_login">Login</string>
+    <string name="text_button_Register">Register</string>
+    <string name="go_to_register1">Belum punya akun?</string>
+    <string name="go_to_register2">Register disini</string>
+    <string name="hint_email">freetogame@mail.com</string>
+    <string name="hint_password">********</string>
+    <string name="hint_username">contoh: freetogame</string>
+    <string name="back">Kembali</string>
+    <string name="featured_recommended"><![CDATA[ditampilkan & direkomendasikan]]></string>
+    <string name="popular_moba_games">game moba populer</string>
+    <string name="popular_racing_games">game balap populer</string>
+    <string name="bottom_nav_home">Home</string>
+    <string name="bottom_nav_feed">Feed</string>
+    <string name="bottom_nav_bookmark">Bookmark</string>
+    <string name="bottom_nav_profile">Profil</string>
+    <string name="update">Perbarui</string>
+    <string name="change_profile_picture">ubah gambar profil</string>
+    <string name="phone_number">Nomor telepon</string>
+    <string name="city">Kota</string>
+    <string name="hint_city">Kota anda</string>
+    <string name="address">Alamat</string>
+    <string name="hint_address">Alamat anda</string>
+    <string name="logout">Keluar</string>
+</resources>
