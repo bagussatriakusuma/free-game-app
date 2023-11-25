@@ -8,11 +8,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.challengechapter5"
+    namespace = "com.example.challengechapter6"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.challengechapter5"
+        applicationId = "com.example.challengechapter6"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
@@ -43,6 +43,7 @@ android {
 }
 
 dependencies {
+    implementation(project(":data"))
 
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
@@ -74,8 +75,16 @@ dependencies {
     implementation("com.squareup.okhttp3:okhttp:4.9.1")
     implementation("com.squareup.okhttp3:logging-interceptor:4.9.1")
 
+    // Room Database
+    implementation("androidx.room:room-runtime:2.6.0")
+    kapt("androidx.room:room-compiler:2.6.0")
+    implementation("androidx.room:room-ktx:2.6.0")
+
     // Datastore
     implementation("androidx.datastore:datastore-preferences:1.0.0")
+
+    // Work Manager
+    implementation("androidx.work:work-runtime-ktx:2.8.1")
 
     // Glide
     implementation("com.github.bumptech.glide:glide:4.16.0")

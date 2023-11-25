@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.ChallengeChapter5" parent="Theme.MaterialComponents.Light.NoActionBar">
+    <style name="Base.Theme.ChallengeChapter6" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
         <item name="colorPrimary">@color/primary_color</item>
         <!-- Customize your light theme here. -->
@@ -9,7 +9,7 @@
         <item name="android:windowLightStatusBar">false</item>
     </style>
 
-    <style name="Theme.ChallengeChapter5" parent="Base.Theme.ChallengeChapter5" />
+    <style name="Theme.ChallengeChapter5" parent="Base.Theme.ChallengeChapter6" />
 
     <style name="LoginTextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
         <item name="boxStrokeColor">@color/primary_color</item>

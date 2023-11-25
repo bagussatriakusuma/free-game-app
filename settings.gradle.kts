@@ -14,6 +14,9 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Challenge Chapter 5"
+rootProject.name = "Challenge Chapter 6"
 include(":app")
- 
+//include(":domain")
+//include(":di")
+include(":data")
+//include(":presentation")
