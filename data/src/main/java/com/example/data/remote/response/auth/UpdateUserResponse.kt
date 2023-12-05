@@ -1,5 +1,6 @@
 package com.example.data.remote.response.auth
 
+import com.example.domain.model.auth.UpdateUser
 import com.google.gson.annotations.SerializedName
 
 data class UpdateUserResponse(
@@ -21,5 +22,20 @@ data class UpdateUserResponse(
         @SerializedName("createdAt"    ) var createdAt   : String? = null,
         @SerializedName("updatedAt"    ) var updatedAt   : String? = null
 
+    )
+}
+
+fun UpdateUserResponse.toUpdateUser(): UpdateUser {
+    return UpdateUser(
+        id = data?.id ?: 0,
+        name = data?.name.orEmpty(),
+        email = data?.email.orEmpty(),
+        password = data?.password.orEmpty(),
+        picture = data?.picture.orEmpty(),
+        phoneNumber = data?.phoneNumber.orEmpty(),
+        address = data?.address.orEmpty(),
+        city = data?.city.orEmpty(),
+        createdAt = data?.createdAt.orEmpty(),
+        updatedAt = data?.updatedAt.orEmpty(),
     )
 }

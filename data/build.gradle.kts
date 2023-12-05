@@ -9,7 +9,7 @@ android {
     compileSdk = 34
 
     defaultConfig {
-        minSdk = 24
+        minSdk = 21
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -33,6 +33,8 @@ android {
 }
 
 dependencies {
+    implementation(project(":domain"))
+
     implementation("androidx.room:room-common:2.6.0")
     implementation("androidx.lifecycle:lifecycle-livedata-core-ktx:2.6.2")
     implementation("androidx.room:room-runtime:2.6.0")

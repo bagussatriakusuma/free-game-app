@@ -1,5 +1,6 @@
 package com.example.data.remote.response.auth
 
+import com.example.domain.model.auth.UserLogin
 import com.google.gson.annotations.SerializedName
 
 data class LoginResponse (
@@ -15,5 +16,15 @@ data class LoginResponse (
         @SerializedName("email" ) var email : String? = null,
         @SerializedName("token" ) var token : String? = null
 
+    )
+}
+
+fun LoginResponse.toUserLogin(): UserLogin {
+    return UserLogin(
+        id = data?.id ?: 0,
+        name = data?.name.orEmpty(),
+        email = data?.email.orEmpty(),
+        token = data?.token.orEmpty(),
+        status = status.orEmpty()
     )
 }

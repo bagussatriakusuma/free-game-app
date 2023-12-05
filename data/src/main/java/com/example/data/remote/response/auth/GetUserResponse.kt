@@ -1,5 +1,7 @@
 package com.example.data.remote.response.auth
 
+import com.example.data.remote.response.main.GetDetailGameResponse
+import com.example.domain.model.auth.UserData
 import com.google.gson.annotations.SerializedName
 
 data class GetUserResponse (
@@ -21,5 +23,20 @@ data class GetUserResponse (
         @SerializedName("createdAt"    ) var createdAt   : String? = null,
         @SerializedName("updatedAt"    ) var updatedAt   : String? = null
 
+    )
+}
+
+fun GetUserResponse.Data.toUserData(): UserData {
+    return UserData(
+        id = id ?: 0,
+        name = name.orEmpty(),
+        email = email.orEmpty(),
+        password = password.orEmpty(),
+        picture = picture.orEmpty(),
+        phoneNumber = phoneNumber.orEmpty(),
+        address = address.orEmpty(),
+        city = city.orEmpty(),
+        createdAt = createdAt.orEmpty(),
+        updatedAt = updatedAt.orEmpty(),
     )
 }

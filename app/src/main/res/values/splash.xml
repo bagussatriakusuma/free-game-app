@@ -13,6 +13,6 @@
 
         <!-- Set the theme of the Activity that directly follows your splash
         screen. This is required. -->
-        <item name="postSplashScreenTheme">@style/Theme.ChallengeChapter5</item>
+        <item name="postSplashScreenTheme">@style/Theme.ChallengeChapter7</item>
     </style>
 </resources>

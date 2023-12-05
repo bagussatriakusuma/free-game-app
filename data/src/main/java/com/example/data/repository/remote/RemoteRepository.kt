@@ -1,20 +1,26 @@
 package com.example.data.repository.remote
 
 import com.example.data.local.datastore.DatastoreManager
-import com.example.data.remote.request.auth.LoginRequest
-import com.example.data.remote.request.auth.RegisterRequest
-import com.example.data.remote.response.auth.GetUserResponse
-import com.example.data.remote.response.auth.LoginResponse
-import com.example.data.remote.response.auth.RegisterResponse
-import com.example.data.remote.response.auth.UpdateUserResponse
-import com.example.data.remote.response.main.GetAllGamesResponse
-import com.example.data.remote.response.main.GetDetailGameResponse
+import com.example.data.remote.response.auth.toUpdateUser
+import com.example.data.remote.response.auth.toUserData
+import com.example.data.remote.response.auth.toUserLogin
+import com.example.data.remote.response.auth.toUserRegister
+import com.example.data.remote.response.main.toAllGames
+import com.example.data.remote.response.main.toDetailGames
 import com.example.data.remote.service.AuthAPI
 import com.example.data.remote.service.MainAPI
-import com.example.domain.AccountRepository
-import com.example.domain.AuthRepository
-import com.example.domain.MainRepository
-import com.example.domain.TokenRepository
+import com.example.domain.model.auth.UpdateUser
+import com.example.domain.model.auth.UserData
+import com.example.domain.model.auth.UserLogin
+import com.example.domain.model.auth.UserLoginRequest
+import com.example.domain.model.auth.UserRegister
+import com.example.domain.model.auth.UserRegisterRequest
+import com.example.domain.model.main.AllGames
+import com.example.domain.model.main.DetailGames
+import com.example.domain.repository.AccountRepository
+import com.example.domain.repository.AuthRepository
+import com.example.domain.repository.MainRepository
+import com.example.domain.repository.TokenRepository
 import kotlinx.coroutines.flow.firstOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -37,16 +43,16 @@ class RemoteRepository @Inject constructor(
         setToken("")
     }
 
-    override suspend fun userLogin(request: LoginRequest): LoginResponse {
-        return apiAuth.login(request)
+    override suspend fun userLogin(request: UserLoginRequest): UserLogin {
+        return apiAuth.login(request).toUserLogin()
     }
 
-    override suspend fun userRegister(request: RegisterRequest): RegisterResponse {
-        return apiAuth.register(request)
+    override suspend fun userRegister(request: UserRegisterRequest): UserRegister {
+        return apiAuth.register(request).toUserRegister()
     }
 
-    override suspend fun getDataUser(token: String): GetUserResponse {
-        return apiAuth.getUser(token = "Bearer $token")
+    override suspend fun getDataUser(token: String): UserData {
+        return apiAuth.getUser(token = "Bearer $token").data!!.toUserData()
     }
 
     override suspend fun updateDataUser(
@@ -56,7 +62,7 @@ class RemoteRepository @Inject constructor(
         phoneNumber: RequestBody?,
         city: RequestBody?,
         address: RequestBody?
-    ): UpdateUserResponse {
+    ): UpdateUser {
         return apiAuth.updateUser(
             token = "Bearer $token",
             picture,
@@ -64,21 +70,21 @@ class RemoteRepository @Inject constructor(
             phoneNumber,
             city,
             address
-        )
+        ).toUpdateUser()
     }
 
-    override suspend fun getAllGames(platform: String): List<GetAllGamesResponse> {
-        return apiMain.allGames(platform)
+    override suspend fun getAllGames(platform: String): List<AllGames> {
+        return apiMain.allGames(platform).map { response -> response.toAllGames() }
     }
 
     override suspend fun getGamesBySorted(
         platform: String,
         category: String
-    ): List<GetAllGamesResponse> {
-        return apiMain.gamesBySorted(platform, category)
+    ): List<AllGames> {
+        return apiMain.gamesBySorted(platform, category).map { response -> response.toAllGames() }
     }
 
-    override suspend fun getDetailGames(id: Int): GetDetailGameResponse {
-        return apiMain.detailGame(id)
+    override suspend fun getDetailGames(id: Int): DetailGames {
+        return apiMain.detailGame(id).toDetailGames()
     }
 }

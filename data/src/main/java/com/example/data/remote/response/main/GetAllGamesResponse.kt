@@ -1,5 +1,6 @@
 package com.example.data.remote.response.main
 
+import com.example.domain.model.main.AllGames
 import com.google.gson.annotations.SerializedName
 
 data class GetAllGamesResponse (
@@ -17,3 +18,19 @@ data class GetAllGamesResponse (
     @SerializedName("freetogame_profile_url" ) var freetogameProfileUrl : String? = null
 
 )
+
+fun GetAllGamesResponse.toAllGames(): AllGames {
+    return AllGames(
+        id = id.hashCode(),
+        title = title.orEmpty(),
+        thumbnail = thumbnail.orEmpty(),
+        shortDescription = shortDescription.orEmpty(),
+        gameUrl = gameUrl.orEmpty(),
+        genre = genre.orEmpty(),
+        platform = platform.orEmpty(),
+        publisher = publisher.orEmpty(),
+        developer = developer.orEmpty(),
+        releaseDate = releaseDate.orEmpty(),
+        freetogameProfileUrl = freetogameProfileUrl.orEmpty(),
+    )
+}

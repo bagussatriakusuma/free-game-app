@@ -1,5 +1,7 @@
 package com.example.data.remote.response.main
 
+import com.example.domain.model.main.DetailGames
+import com.example.domain.model.main.ScreenshotsGames
 import com.google.gson.annotations.SerializedName
 
 data class GetDetailGameResponse (
@@ -37,4 +39,32 @@ data class GetDetailGameResponse (
         @SerializedName("image" ) var image : String? = null
 
     )
+}
+
+fun GetDetailGameResponse.toDetailGames(): DetailGames {
+    return DetailGames(
+        id = id.hashCode(),
+        title = title.orEmpty(),
+        thumbnail = thumbnail.orEmpty(),
+        status = status.orEmpty(),
+        shortDescription = shortDescription.orEmpty(),
+        description = description.orEmpty(),
+        gameUrl = gameUrl.orEmpty(),
+        genre = genre.orEmpty(),
+        platform = platform.orEmpty(),
+        publisher = publisher.orEmpty(),
+        developer = developer.orEmpty(),
+        releaseDate = releaseDate.orEmpty(),
+        freetogameProfileUrl = freetogameProfileUrl.orEmpty(),
+        screenshots = screenshots.toScreenshotsGamesList()
+    )
+}
+
+fun List<GetDetailGameResponse.Screenshots>.toScreenshotsGamesList(): List<ScreenshotsGames> {
+    return map { screenshot ->
+        ScreenshotsGames(
+            id = screenshot.id ?: 0,
+            image = screenshot.image.orEmpty()
+        )
+    }
 }

@@ -8,12 +8,12 @@ plugins {
 }
 
 android {
-    namespace = "com.example.challengechapter6"
+    namespace = "com.example.challengechapter7"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.challengechapter6"
-        minSdk = 24
+        applicationId = "com.example.challengechapter7"
+        minSdk = 21
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -43,7 +43,7 @@ android {
 }
 
 dependencies {
-    implementation(project(":data"))
+    implementation(project(":di"))
 
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
@@ -100,6 +100,10 @@ dependencies {
 
     // Image Slider
     implementation("com.github.denzcoskun:ImageSlideshow:0.1.2")
+
+    // Chucker
+    debugImplementation("com.github.chuckerteam.chucker:library:4.0.0")
+    releaseImplementation("com.github.chuckerteam.chucker:library-no-op:4.0.0")
 }
 
 kapt {

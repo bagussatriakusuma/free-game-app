@@ -3,7 +3,7 @@ package com.example.data.repository.local
 import androidx.lifecycle.LiveData
 import com.example.data.local.dao.BookmarkDAO
 import com.example.data.local.entity.BookmarkEntity
-import com.example.domain.BookmarkRepository
+import com.example.domain.repository.BookmarkRepository
 import javax.inject.Inject
 
 class LocalRepository @Inject constructor(
