@@ -1,4 +1,4 @@
-# Challenge Chapter 5 & 6 - Synrgy🔥
+# Challenge Chapter 5, 6, & 7 - Synrgy🔥
 
 📌Note: <p>
 in this project, i didn't use loading state because of the lack of time and deadlines. this might affect when do the request and fetching response. in the next challenge chapter i'll try to add loading state with shimmer `https://github.com/facebookarchive/shimmer-android`, so it will have the loading state and more looks good👍<br>
@@ -6,6 +6,7 @@ and also i might add more feature in the next challenge chapter.
 
 ### Library that i used🚀
 - `Retrofit` -> networking
+- `chucker` -> http inspector
 - `ROOM DB` -> local database
 - `Work Manager` -> blured out image profile
 - `Coroutines` -> asynchronous
