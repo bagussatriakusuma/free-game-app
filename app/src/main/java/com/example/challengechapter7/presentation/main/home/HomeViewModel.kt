@@ -12,11 +12,13 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
+import kotlin.coroutines.CoroutineContext
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val recommendedGamesUseCase: RecommendedGamesUseCase,
     private val popularGamesUseCase: PopularGamesUseCase,
+    private val dispatcher: CoroutineContext
 ): ViewModel(){
     private val _showRecommendedGames = MutableLiveData<List<AllGames>>()
     val showRecommendedGames: LiveData<List<AllGames>> = _showRecommendedGames
@@ -34,7 +36,7 @@ class HomeViewModel @Inject constructor(
     val error: LiveData<String?> = _error
 
     fun recommendedGames(){
-        viewModelScope.launch(Dispatchers.Main){
+        viewModelScope.launch(dispatcher){
             try {
                 withContext(Dispatchers.Main){
                     _showRecommendedGames.value = recommendedGamesUseCase.invoke()
@@ -48,7 +50,7 @@ class HomeViewModel @Inject constructor(
     }
 
     fun popularMobaGames(){
-        viewModelScope.launch(Dispatchers.Main){
+        viewModelScope.launch(dispatcher){
             try {
                 withContext(Dispatchers.Main){
                     _showPopularMobaGames.value = popularGamesUseCase.invoke("pc", "moba")
@@ -62,7 +64,7 @@ class HomeViewModel @Inject constructor(
     }
 
     fun popularRacingGames(){
-        viewModelScope.launch(Dispatchers.Main){
+        viewModelScope.launch(dispatcher){
             try {
                 withContext(Dispatchers.Main){
                     _showPopularRacingGames.value = popularGamesUseCase.invoke("pc", "racing")

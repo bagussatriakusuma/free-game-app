@@ -12,6 +12,7 @@ import com.example.challengechapter7.R
 import com.example.challengechapter7.databinding.FragmentBookmarkBinding
 import com.example.challengechapter7.presentation.main.bookmark.adapter.BookmarkAdapter
 import com.example.data.local.entity.BookmarkEntity
+import com.example.domain.model.main.Bookmark
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -25,7 +26,7 @@ class BookmarkFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
+    ): View {
         binding = FragmentBookmarkBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -37,7 +38,7 @@ class BookmarkFragment : Fragment() {
 
     private fun bindAdapter() {
         bookmarkAdapter = BookmarkAdapter(object : BookmarkAdapter.OnClickListener {
-            override fun onClickItem(data: BookmarkEntity) {
+            override fun onClickItem(data: Bookmark) {
                 val bundle = Bundle()
                 bundle.putInt(GAME_ID, data.id)
                 findNavController().navigate(R.id.action_bookmarkFragment_to_detailGameFragment, bundle)

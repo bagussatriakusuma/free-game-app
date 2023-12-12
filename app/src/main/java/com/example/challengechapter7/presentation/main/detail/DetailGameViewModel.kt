@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.data.local.entity.BookmarkEntity
+import com.example.domain.model.main.Bookmark
 import com.example.domain.model.main.DetailGames
 import com.example.domain.repository.BookmarkRepository
 import com.example.presentation.usecase.main.detail.GameDetailsUseCase
@@ -14,11 +15,13 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
+import kotlin.coroutines.CoroutineContext
 
 @HiltViewModel
 class DetailGameViewModel @Inject constructor(
     private val gameDetailsUseCase: GameDetailsUseCase,
-    private val bookmarkRepository: BookmarkRepository
+    private val bookmarkRepository: BookmarkRepository,
+    private val dispatcher: CoroutineContext
 ): ViewModel(){
     private val _showGameDetails = MutableLiveData<DetailGames>()
     val showGameDetails: LiveData<DetailGames> = _showGameDetails
@@ -33,7 +36,7 @@ class DetailGameViewModel @Inject constructor(
     val error: LiveData<String?> = _error
 
     fun gameDetails(id: Int){
-        viewModelScope.launch(Dispatchers.Main){
+        viewModelScope.launch(dispatcher){
             try {
                 withContext(Dispatchers.Main){
                     _showGameDetails.value = gameDetailsUseCase.invoke(id)
@@ -51,16 +54,16 @@ class DetailGameViewModel @Inject constructor(
     }
 
     fun insertToBookmark(gameId: Int) {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(dispatcher) {
             try {
                 val gameDetails = gameDetailsUseCase.invoke(gameId)
-                val bookmarkEntity = BookmarkEntity(
-                    id = gameDetails.id!!,
-                    title = gameDetails.title!!,
-                    thumbnail = gameDetails.thumbnail!!,
-                    genre = gameDetails.genre!!
+                val bookmark = Bookmark(
+                    id = gameDetails.id,
+                    title = gameDetails.title,
+                    thumbnail = gameDetails.thumbnail,
+                    genre = gameDetails.genre
                 )
-                bookmarkRepository.insertBookmark(bookmarkEntity)
+                bookmarkRepository.insertBookmark(bookmark)
                 Log.d("DetailGameViewModel", "Game bookmarked successfully")
 
             } catch (e: Exception) {

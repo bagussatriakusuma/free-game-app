@@ -1,7 +1,7 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
-    id("androidx.navigation.safeargs")
+//    id("androidx.navigation.safeargs")
     id("kotlin-kapt")
     id("kotlin-android")
     id("com.google.dagger.hilt.android")
@@ -23,19 +23,49 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            isShrinkResources = true
+            isDebuggable = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
         }
+        debug {
+            isDebuggable = true
+            applicationIdSuffix = ".debug"
+            versionNameSuffix = "-debug"
+        }
+    }
+    flavorDimensionList += listOf("version")
+    productFlavors {
+        register("demo"){
+            dimension = "version"
+            applicationIdSuffix = ".demo"
+            versionNameSuffix = "-demo"
+            resValue(
+                "string",
+                "app_name",
+                "Challenge Chapter 7 - Demo"
+            )
+        }
+        register("full"){
+            dimension = "version"
+            applicationIdSuffix = ".full"
+            versionNameSuffix = "-full"
+            resValue(
+                "string",
+                "app_name",
+                "Challenge Chapter 7"
+            )
+        }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "11"
     }
     buildFeatures {
         viewBinding = true
@@ -49,9 +79,21 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.10.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+
+    // Optional -- Robolectric environment
+    testImplementation("androidx.test:core:1.5.0")
+    // Optional -- Mockito framework
+    testImplementation("org.mockito:mockito-core:5.3.1")
+    // Optional -- mockito-kotlin
+    testImplementation("org.mockito.kotlin:mockito-kotlin:5.1.0")
+    // Optional -- Mockk framework
+    testImplementation("io.mockk:mockk:1.12.4")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
+    testImplementation("androidx.arch.core:core-testing:2.2.0")
 
     // Jetpack Navigation Components
     implementation("androidx.navigation:navigation-fragment-ktx:2.7.5")
@@ -108,4 +150,10 @@ dependencies {
 
 kapt {
     correctErrorTypes = true
+    javacOptions {
+        // Set the JVM target for kapt
+        option("-source", "11")
+        option("-target", "11")
+    }
+
 }

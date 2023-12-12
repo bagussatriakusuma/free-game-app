@@ -56,7 +56,7 @@ class LoginActivity : AppCompatActivity() {
         val email = binding.etEmail.text.toString()
         val password = binding.etPassword.text.toString()
         if (validator(email, password)){
-            val request = com.example.domain.model.auth.UserLoginRequest(email, password)
+            val request = UserLoginRequest(email, password)
             viewModel.userLogin(request)
         }
     }

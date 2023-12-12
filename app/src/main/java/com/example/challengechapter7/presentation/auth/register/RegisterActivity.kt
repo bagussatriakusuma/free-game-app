@@ -57,7 +57,7 @@ class RegisterActivity : AppCompatActivity() {
         val email = binding.etEmail.text.toString()
         val password = binding.etPassword.text.toString()
         if (validator(name, email, password)){
-            val request = com.example.domain.model.auth.UserRegisterRequest(name, email, password)
+            val request = UserRegisterRequest(name, email, password)
             viewModel.userRegister(request)
         }
     }

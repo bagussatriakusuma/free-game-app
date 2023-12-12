@@ -27,7 +27,7 @@ class DetailGameFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentDetailGameBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -54,7 +54,7 @@ class DetailGameFragment : Fragment() {
 
     private fun bindAdapter(){
         screenshotsAdapter = ScreenshotsAdapter(object : ScreenshotsAdapter.OnClickListener {
-            override fun onClickItem(data: com.example.domain.model.main.ScreenshotsGames) {
+            override fun onClickItem(data: ScreenshotsGames) {
                 Glide.with(requireContext())
                     .load(data.image)
                     .into(binding.ivThumbnail)

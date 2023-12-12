@@ -11,10 +11,12 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
+import kotlin.coroutines.CoroutineContext
 
 @HiltViewModel
 class RegisterViewModel @Inject constructor(
-    private val userRegisterUseCase: UserRegisterUseCase
+    private val userRegisterUseCase: UserRegisterUseCase,
+    private val dispatcher: CoroutineContext
 ): ViewModel() {
     private val _openLoginPage = MutableLiveData<Boolean>()
     val openLoginPage: LiveData<Boolean> = _openLoginPage
@@ -23,7 +25,7 @@ class RegisterViewModel @Inject constructor(
     val error: LiveData<String?> = _error
 
     fun userRegister(request: UserRegisterRequest){
-        viewModelScope.launch(Dispatchers.IO){
+        viewModelScope.launch(dispatcher){
             try{
                 withContext(Dispatchers.Main){
                     _openLoginPage.value = userRegisterUseCase.invoke(request)

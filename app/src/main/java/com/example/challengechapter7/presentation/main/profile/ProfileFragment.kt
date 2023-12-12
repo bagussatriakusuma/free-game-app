@@ -41,7 +41,7 @@ class ProfileFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentProfileBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -65,7 +65,7 @@ class ProfileFragment : Fragment() {
         binding.btnLogout.setOnClickListener { viewModel.clearDataUser() }
     }
 
-    private fun handleShowUser(user: com.example.domain.model.auth.UserData?) {
+    private fun handleShowUser(user: UserData?) {
         Glide.with(requireContext())
             .load(user?.picture.toString())
             .placeholder(

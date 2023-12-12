@@ -1,5 +1,6 @@
 package com.example.data.repository.remote
 
+import androidx.annotation.VisibleForTesting
 import com.example.data.local.datastore.DatastoreManager
 import com.example.data.remote.response.auth.toUpdateUser
 import com.example.data.remote.response.auth.toUserData
@@ -27,7 +28,7 @@ import okhttp3.RequestBody
 import javax.inject.Inject
 
 class RemoteRepository @Inject constructor(
-    private val datastore: DatastoreManager,
+    @VisibleForTesting internal val datastore: DatastoreManager,
     private val apiAuth: AuthAPI,
     private val apiMain: MainAPI
 ): TokenRepository, AuthRepository, AccountRepository, MainRepository {
