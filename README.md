@@ -7,6 +7,8 @@ and also i might add more feature in the next challenge chapter.
 ### Library that i used🚀
 - `Retrofit` -> networking
 - `chucker` -> http inspector
+- `ktlint` -> linter
+- `mockito` & `JUnit4` -> unitTest
 - `ROOM DB` -> local database
 - `Work Manager` -> blured out image profile
 - `Coroutines` -> asynchronous
