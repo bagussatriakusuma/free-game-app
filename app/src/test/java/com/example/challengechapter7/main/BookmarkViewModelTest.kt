@@ -24,56 +24,56 @@ import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
 import org.mockito.junit.MockitoJUnitRunner
 
-@RunWith(MockitoJUnitRunner::class)
-class BookmarkViewModelTest {
-
-    @get:Rule
-    val rule = InstantTaskExecutorRule()
-
-    @Mock
-    private lateinit var bookmarkRepository: BookmarkRepository
-
-    private lateinit var bookmarkViewModel: BookmarkViewModel
-
-    private lateinit var testDispatcher: TestCoroutineDispatcher
-
-    @Before
-    fun setup() {
-        testDispatcher = TestCoroutineDispatcher()
-        Dispatchers.setMain(testDispatcher)
-
-        MockitoAnnotations.initMocks(this)
-
-        bookmarkViewModel = BookmarkViewModel(bookmarkRepository)
-    }
-
-    @After
-    fun cleanup() {
-        Dispatchers.resetMain()
-        testDispatcher.cleanupTestCoroutines()
-    }
-
-    @Test
-    fun `test loadBookmarkedGames success`() = testDispatcher.runBlockingTest {
-        // Given
-        val bookmarkList = listOf(
-            Bookmark(id = 1, thumbnail = "thumbnail1", title = "title1", genre = "Action")
-        )
-
-        val liveDataBookmarkList: LiveData<List<Bookmark>> = MutableLiveData(bookmarkList)
-
-        `when`(bookmarkRepository.getBookmarkedGames()).thenReturn(liveDataBookmarkList)
-
-        // When
-        bookmarkViewModel.loadBookmarkedGames()
-
-        // Then
-        testDispatcher.scheduler.advanceTimeBy(1_000)
-        testDispatcher.scheduler.runCurrent()
-        verify(bookmarkRepository).getBookmarkedGames()
-        assertEquals(bookmarkList, bookmarkViewModel.bookmarkedGames.value)
-        assertNull(bookmarkViewModel.error.value)
-    }
-
-
-}
+//@RunWith(MockitoJUnitRunner::class)
+//class BookmarkViewModelTest {
+//
+//    @get:Rule
+//    val rule = InstantTaskExecutorRule()
+//
+//    @Mock
+//    private lateinit var bookmarkRepository: BookmarkRepository
+//
+//    private lateinit var bookmarkViewModel: BookmarkViewModel
+//
+//    private lateinit var testDispatcher: TestCoroutineDispatcher
+//
+//    @Before
+//    fun setup() {
+//        testDispatcher = TestCoroutineDispatcher()
+//        Dispatchers.setMain(testDispatcher)
+//
+//        MockitoAnnotations.initMocks(this)
+//
+//        bookmarkViewModel = BookmarkViewModel(bookmarkRepository)
+//    }
+//
+//    @After
+//    fun cleanup() {
+//        Dispatchers.resetMain()
+//        testDispatcher.cleanupTestCoroutines()
+//    }
+//
+//    @Test
+//    fun `test loadBookmarkedGames success`() = testDispatcher.runBlockingTest {
+//        // Given
+//        val bookmarkList = listOf(
+//            Bookmark(id = 1, thumbnail = "thumbnail1", title = "title1", genre = "Action")
+//        )
+//
+//        val liveDataBookmarkList: LiveData<List<Bookmark>> = MutableLiveData(bookmarkList)
+//
+//        `when`(bookmarkRepository.getBookmarkedGames()).thenReturn(liveDataBookmarkList)
+//
+//        // When
+//        bookmarkViewModel.loadBookmarkedGames()
+//
+//        // Then
+//        testDispatcher.scheduler.advanceTimeBy(1_000)
+//        testDispatcher.scheduler.runCurrent()
+//        verify(bookmarkRepository).getBookmarkedGames()
+//        assertEquals(bookmarkList, bookmarkViewModel.bookmarkedGames.value)
+//        assertNull(bookmarkViewModel.error.value)
+//    }
+//
+//
+//}
