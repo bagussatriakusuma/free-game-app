@@ -1,5 +1,7 @@
 # Challenge Chapter 5, 6, & 7 - Synrgy🔥
 
+[![Android CI](https://github.com/bagussatriakusuma/free-game-app/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/bagussatriakusuma/free-game-app/actions/workflows/ci.yml)
+
 📌Note: <p>
 in this project, i didn't use loading state because of the lack of time and deadlines. this might affect when do the request and fetching response. in the next challenge chapter i'll try to add loading state with shimmer `https://github.com/facebookarchive/shimmer-android`, so it will have the loading state and more looks good👍<br>
 and also i might add more feature in the next challenge chapter.
