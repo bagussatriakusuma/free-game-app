@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.data.local.entity.BookmarkEntity
-import com.example.domain.BookmarkRepository
+import com.example.challengechapter6.data.local.entity.BookmarkEntity
+import com.example.challengechapter6.domain.BookmarkRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

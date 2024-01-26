@@ -1,8 +1,7 @@
 package com.example.challengechapter6.presentation.usecase.main.profile
 
-import com.example.domain.AccountRepository
-import com.example.domain.TokenRepository
-import com.example.challengechapter6.common.reduceFileImage
+import com.example.challengechapter6.domain.AccountRepository
+import com.example.challengechapter6.domain.TokenRepository
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody

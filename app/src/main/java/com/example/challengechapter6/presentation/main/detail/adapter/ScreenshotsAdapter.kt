@@ -6,29 +6,29 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.challengechapter6.data.remote.response.main.GetDetailGameResponse
 import com.example.challengechapter6.databinding.ListItemScreenshotsBinding
-import com.example.data.remote.response.main.GetDetailGameResponse
 
 class ScreenshotsAdapter(private val onClick: OnClickListener): RecyclerView.Adapter<ScreenshotsAdapter.ViewHolder>() {
 
     private val diffCallBack = object: DiffUtil.ItemCallback<GetDetailGameResponse.Screenshots>(){
-        override fun areItemsTheSame(oldItem: com.example.data.remote.response.main.GetDetailGameResponse.Screenshots, newItem: com.example.data.remote.response.main.GetDetailGameResponse.Screenshots): Boolean {
+        override fun areItemsTheSame(oldItem: GetDetailGameResponse.Screenshots, newItem: GetDetailGameResponse.Screenshots): Boolean {
             return oldItem == newItem
         }
-        override fun areContentsTheSame(oldItem: com.example.data.remote.response.main.GetDetailGameResponse.Screenshots, newItem: com.example.data.remote.response.main.GetDetailGameResponse.Screenshots): Boolean {
+        override fun areContentsTheSame(oldItem: GetDetailGameResponse.Screenshots, newItem: GetDetailGameResponse.Screenshots): Boolean {
             return oldItem.id == newItem.id
         }
     }
 
     private val differ = AsyncListDiffer(this,diffCallBack)
-    fun submitData(value: List<com.example.data.remote.response.main.GetDetailGameResponse.Screenshots>?) = differ.submitList(value)
+    fun submitData(value: List<GetDetailGameResponse.Screenshots>?) = differ.submitList(value)
 
     interface OnClickListener {
-        fun onClickItem (data: com.example.data.remote.response.main.GetDetailGameResponse.Screenshots)
+        fun onClickItem (data: GetDetailGameResponse.Screenshots)
     }
 
     inner class ViewHolder(private val binding: ListItemScreenshotsBinding): RecyclerView.ViewHolder(binding.root){
-        fun bind (data: com.example.data.remote.response.main.GetDetailGameResponse.Screenshots){
+        fun bind (data: GetDetailGameResponse.Screenshots){
 
             Glide.with(binding.root)
                 .load(data.image)

@@ -10,11 +10,11 @@ import androidx.navigation.fragment.findNavController
 import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.models.SlideModel
 import com.example.challengechapter6.R
+import com.example.challengechapter6.data.remote.response.main.GetAllGamesResponse
 import com.example.challengechapter6.databinding.FragmentHomeBinding
 import com.example.challengechapter6.presentation.main.home.adapter.PopularMobaGameAdapter
 import com.example.challengechapter6.presentation.main.home.adapter.PopularRacingGameAdapter
 import com.example.challengechapter6.presentation.main.home.adapter.RecommendedGameAdapter
-import com.example.data.remote.response.main.GetAllGamesResponse
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -55,7 +55,7 @@ class HomeFragment : Fragment() {
     }
     private fun bindAdapter(){
         recommendedGameAdapter = RecommendedGameAdapter(object : RecommendedGameAdapter.OnClickListener {
-            override fun onClickItem(data: com.example.data.remote.response.main.GetAllGamesResponse) {
+            override fun onClickItem(data: GetAllGamesResponse) {
                 val bundle = Bundle()
                 bundle.putInt(GAME_ID, data.id.hashCode())
                 findNavController().navigate(R.id.action_homeFragment_to_detailGameFragment, bundle)
@@ -64,7 +64,7 @@ class HomeFragment : Fragment() {
         binding.rvRecommendedGames.adapter = recommendedGameAdapter
 
         popularMobaGameAdapter = PopularMobaGameAdapter(object : PopularMobaGameAdapter.OnClickListener {
-            override fun onClickItem(data: com.example.data.remote.response.main.GetAllGamesResponse) {
+            override fun onClickItem(data: GetAllGamesResponse) {
                 val bundle = Bundle()
                 bundle.putInt(GAME_ID, data.id.hashCode())
                 findNavController().navigate(R.id.action_homeFragment_to_detailGameFragment, bundle)
@@ -73,7 +73,7 @@ class HomeFragment : Fragment() {
         binding.rvPopularMobaGames.adapter = popularMobaGameAdapter
 
         popularRacingGameAdapter = PopularRacingGameAdapter(object : PopularRacingGameAdapter.OnClickListener {
-            override fun onClickItem(data: com.example.data.remote.response.main.GetAllGamesResponse) {
+            override fun onClickItem(data: GetAllGamesResponse) {
                 val bundle = Bundle()
                 bundle.putInt(GAME_ID, data.id.hashCode())
                 findNavController().navigate(R.id.action_homeFragment_to_detailGameFragment, bundle)
@@ -82,15 +82,15 @@ class HomeFragment : Fragment() {
         binding.rvPopularRacingGames.adapter = popularRacingGameAdapter
     }
 
-    private fun handleDataRecommendedGames(recommendedGames: List<com.example.data.remote.response.main.GetAllGamesResponse>) {
+    private fun handleDataRecommendedGames(recommendedGames: List<GetAllGamesResponse>) {
         recommendedGameAdapter.submitData(recommendedGames)
     }
 
-    private fun handleDataPopularMobaGames(popularMobaGames: List<com.example.data.remote.response.main.GetAllGamesResponse>) {
+    private fun handleDataPopularMobaGames(popularMobaGames: List<GetAllGamesResponse>) {
         popularMobaGameAdapter.submitData(popularMobaGames)
     }
 
-    private fun handleDataPopularRacingGames(popularRacingGames: List<com.example.data.remote.response.main.GetAllGamesResponse>) {
+    private fun handleDataPopularRacingGames(popularRacingGames: List<GetAllGamesResponse>) {
         popularRacingGameAdapter.submitData(popularRacingGames)
     }
 

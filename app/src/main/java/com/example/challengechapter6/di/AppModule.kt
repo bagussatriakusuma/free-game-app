@@ -2,12 +2,17 @@ package com.example.challengechapter6.di
 
 import android.app.Application
 import android.content.Context
-import com.example.data.local.dao.BookmarkDAO
-import com.example.domain.AccountRepository
-import com.example.domain.AuthRepository
-import com.example.domain.BookmarkRepository
-import com.example.domain.MainRepository
-import com.example.domain.TokenRepository
+import com.example.challengechapter6.data.local.dao.BookmarkDAO
+import com.example.challengechapter6.data.local.datastore.DatastoreManager
+import com.example.challengechapter6.data.remote.service.AuthAPI
+import com.example.challengechapter6.data.remote.service.MainAPI
+import com.example.challengechapter6.data.repository.local.LocalRepository
+import com.example.challengechapter6.data.repository.remote.RemoteRepository
+import com.example.challengechapter6.domain.AccountRepository
+import com.example.challengechapter6.domain.AuthRepository
+import com.example.challengechapter6.domain.BookmarkRepository
+import com.example.challengechapter6.domain.MainRepository
+import com.example.challengechapter6.domain.TokenRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -27,8 +32,8 @@ class AppModule {
     @Provides
     fun provideLocalRepository(
         bookmarkDAO: BookmarkDAO
-    ): com.example.data.repository.local.LocalRepository {
-        return com.example.data.repository.local.LocalRepository(
+    ): LocalRepository {
+        return LocalRepository(
             bookmarkDAO
         )
     }
@@ -36,11 +41,11 @@ class AppModule {
     @Singleton
     @Provides
     fun provideRemoteRepository(
-        datastore: com.example.data.local.datastore.DatastoreManager,
-        apiAuth: com.example.data.remote.service.AuthAPI,
-        apiMain: com.example.data.remote.service.MainAPI
-    ): com.example.data.repository.remote.RemoteRepository {
-        return com.example.data.repository.remote.RemoteRepository(
+        datastore: DatastoreManager,
+        apiAuth: AuthAPI,
+        apiMain: MainAPI
+    ): RemoteRepository {
+        return RemoteRepository(
             datastore,
             apiAuth,
             apiMain
@@ -49,31 +54,31 @@ class AppModule {
 
     @Singleton
     @Provides
-    fun provideAuthRepository(remoteRepository: com.example.data.repository.remote.RemoteRepository): AuthRepository {
+    fun provideAuthRepository(remoteRepository: RemoteRepository): AuthRepository {
         return remoteRepository
     }
 
     @Singleton
     @Provides
-    fun provideAccountRepository(remoteRepository: com.example.data.repository.remote.RemoteRepository): AccountRepository {
+    fun provideAccountRepository(remoteRepository: RemoteRepository): AccountRepository {
         return remoteRepository
     }
 
     @Singleton
     @Provides
-    fun provideTokenRepository(remoteRepository: com.example.data.repository.remote.RemoteRepository): TokenRepository {
+    fun provideTokenRepository(remoteRepository: RemoteRepository): TokenRepository {
         return remoteRepository
     }
 
     @Singleton
     @Provides
-    fun provideMainRepository(remoteRepository: com.example.data.repository.remote.RemoteRepository): MainRepository {
+    fun provideMainRepository(remoteRepository: RemoteRepository): MainRepository {
         return remoteRepository
     }
 
     @Singleton
     @Provides
-    fun provideBookmarkRepository(localRepository: com.example.data.repository.local.LocalRepository): BookmarkRepository {
+    fun provideBookmarkRepository(localRepository: LocalRepository): BookmarkRepository {
         return localRepository
     }
 }

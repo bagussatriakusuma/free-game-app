@@ -5,8 +5,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.data.local.entity.BookmarkEntity
-import com.example.domain.BookmarkRepository
+import com.example.challengechapter6.data.local.entity.BookmarkEntity
+import com.example.challengechapter6.data.remote.response.main.GetDetailGameResponse
+import com.example.challengechapter6.domain.BookmarkRepository
 import com.example.challengechapter6.presentation.usecase.main.detail.GameDetailsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -19,8 +20,8 @@ class DetailGameViewModel @Inject constructor(
     private val gameDetailsUseCase: GameDetailsUseCase,
     private val bookmarkRepository: BookmarkRepository
 ): ViewModel(){
-    private val _showGameDetails = MutableLiveData<com.example.data.remote.response.main.GetDetailGameResponse>()
-    val showGameDetails: LiveData<com.example.data.remote.response.main.GetDetailGameResponse> = _showGameDetails
+    private val _showGameDetails = MutableLiveData<GetDetailGameResponse>()
+    val showGameDetails: LiveData<GetDetailGameResponse> = _showGameDetails
 
     private val _bookmarkClicked = MutableLiveData<Int>()
     val bookmarkClicked: LiveData<Int> = _bookmarkClicked

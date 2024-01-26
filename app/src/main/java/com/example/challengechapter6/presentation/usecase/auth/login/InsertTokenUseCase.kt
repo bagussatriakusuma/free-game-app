@@ -1,6 +1,6 @@
 package com.example.challengechapter6.presentation.usecase.auth.login
 
-import com.example.domain.TokenRepository
+import com.example.challengechapter6.domain.TokenRepository
 import javax.inject.Inject
 
 class InsertTokenUseCase @Inject constructor(

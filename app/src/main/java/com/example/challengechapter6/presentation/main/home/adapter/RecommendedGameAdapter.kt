@@ -6,29 +6,29 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.challengechapter6.data.remote.response.main.GetAllGamesResponse
 import com.example.challengechapter6.databinding.ListItemGamesBinding
-import com.example.data.remote.response.main.GetAllGamesResponse
 
 class RecommendedGameAdapter(private val onClick: OnClickListener): RecyclerView.Adapter<RecommendedGameAdapter.ViewHolder>() {
 
-    private val diffCallBack = object: DiffUtil.ItemCallback<com.example.data.remote.response.main.GetAllGamesResponse>(){
-        override fun areItemsTheSame(oldItem: com.example.data.remote.response.main.GetAllGamesResponse, newItem: com.example.data.remote.response.main.GetAllGamesResponse): Boolean {
+    private val diffCallBack = object: DiffUtil.ItemCallback<GetAllGamesResponse>(){
+        override fun areItemsTheSame(oldItem: GetAllGamesResponse, newItem: GetAllGamesResponse): Boolean {
             return oldItem == newItem
         }
-        override fun areContentsTheSame(oldItem: com.example.data.remote.response.main.GetAllGamesResponse, newItem: com.example.data.remote.response.main.GetAllGamesResponse): Boolean {
+        override fun areContentsTheSame(oldItem: GetAllGamesResponse, newItem: GetAllGamesResponse): Boolean {
             return oldItem.id == newItem.id
         }
     }
 
     private val differ = AsyncListDiffer(this,diffCallBack)
-    fun submitData(value: List<com.example.data.remote.response.main.GetAllGamesResponse>?) = differ.submitList(value)
+    fun submitData(value: List<GetAllGamesResponse>?) = differ.submitList(value)
 
     interface OnClickListener {
-        fun onClickItem (data: com.example.data.remote.response.main.GetAllGamesResponse)
+        fun onClickItem (data: GetAllGamesResponse)
     }
 
     inner class ViewHolder(private val binding: ListItemGamesBinding): RecyclerView.ViewHolder(binding.root){
-        fun bind (data: com.example.data.remote.response.main.GetAllGamesResponse){
+        fun bind (data: GetAllGamesResponse){
             Glide.with(binding.root)
                 .load(data.thumbnail)
                 .into(binding.ivThumbnail)

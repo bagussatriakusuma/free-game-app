@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.data.local.entity.BookmarkEntity
+import com.example.challengechapter6.data.local.entity.BookmarkEntity
 import com.example.challengechapter6.databinding.ListItemBookmarkBinding
 
 class BookmarkAdapter(private val onClick: OnClickListener) :

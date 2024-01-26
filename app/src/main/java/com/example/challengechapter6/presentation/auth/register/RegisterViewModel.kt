@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.challengechapter6.data.remote.request.auth.RegisterRequest
 import com.example.challengechapter6.presentation.usecase.auth.register.UserRegisterUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -21,7 +22,7 @@ class RegisterViewModel @Inject constructor(
     private val _error = MutableLiveData<String?>()
     val error: LiveData<String?> = _error
 
-    fun userRegister(request: com.example.data.remote.request.auth.RegisterRequest){
+    fun userRegister(request: RegisterRequest){
         viewModelScope.launch(Dispatchers.IO){
             try{
                 withContext(Dispatchers.Main){

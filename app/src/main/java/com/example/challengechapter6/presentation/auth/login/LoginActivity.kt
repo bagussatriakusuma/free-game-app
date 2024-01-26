@@ -6,10 +6,10 @@ import android.os.Bundle
 import android.util.Patterns
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.example.challengechapter6.data.remote.request.auth.LoginRequest
 import com.example.challengechapter6.databinding.ActivityLoginBinding
 import com.example.challengechapter6.presentation.MainActivity
 import com.example.challengechapter6.presentation.auth.register.RegisterActivity
-import com.example.data.remote.request.auth.LoginRequest
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -56,7 +56,7 @@ class LoginActivity : AppCompatActivity() {
         val email = binding.etEmail.text.toString()
         val password = binding.etPassword.text.toString()
         if (validator(email, password)){
-            val request = com.example.data.remote.request.auth.LoginRequest(email, password)
+            val request = LoginRequest(email, password)
             viewModel.userLogin(request)
         }
     }

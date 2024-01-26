@@ -2,16 +2,16 @@ package com.example.challengechapter6.presentation.main.bookmark
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.challengechapter6.R
+import com.example.challengechapter6.data.local.entity.BookmarkEntity
 import com.example.challengechapter6.databinding.FragmentBookmarkBinding
 import com.example.challengechapter6.presentation.main.bookmark.adapter.BookmarkAdapter
-import com.example.data.local.entity.BookmarkEntity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

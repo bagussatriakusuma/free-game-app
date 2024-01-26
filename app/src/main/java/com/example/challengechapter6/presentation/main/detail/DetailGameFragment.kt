@@ -10,11 +10,11 @@ import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.challengechapter6.R
 import com.example.challengechapter6.common.convertDate
+import com.example.challengechapter6.data.remote.response.main.GetDetailGameResponse
 import com.example.challengechapter6.databinding.FragmentDetailGameBinding
 import com.example.challengechapter6.presentation.main.bookmark.BookmarkFragment
 import com.example.challengechapter6.presentation.main.detail.adapter.ScreenshotsAdapter
 import com.example.challengechapter6.presentation.main.home.HomeFragment
-import com.example.data.remote.response.main.GetDetailGameResponse
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -53,7 +53,7 @@ class DetailGameFragment : Fragment() {
 
     private fun bindAdapter(){
         screenshotsAdapter = ScreenshotsAdapter(object : ScreenshotsAdapter.OnClickListener {
-            override fun onClickItem(data: com.example.data.remote.response.main.GetDetailGameResponse.Screenshots) {
+            override fun onClickItem(data: GetDetailGameResponse.Screenshots) {
                 Glide.with(requireContext())
                     .load(data.image)
                     .into(binding.ivThumbnail)
@@ -72,7 +72,7 @@ class DetailGameFragment : Fragment() {
         gameID?.let { viewModel.onBookmarkIconClick(it) }
     }
 
-    private fun handleShowGameDetails(getDetailGameResponse: com.example.data.remote.response.main.GetDetailGameResponse?) {
+    private fun handleShowGameDetails(getDetailGameResponse: GetDetailGameResponse?) {
         Glide.with(requireContext())
             .load(getDetailGameResponse?.thumbnail)
             .into(binding.ivThumbnail)

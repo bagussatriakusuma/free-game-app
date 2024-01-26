@@ -1,9 +1,9 @@
 package com.example.challengechapter6.di
 
-import com.example.domain.AccountRepository
-import com.example.domain.AuthRepository
-import com.example.domain.MainRepository
-import com.example.domain.TokenRepository
+import com.example.challengechapter6.domain.AccountRepository
+import com.example.challengechapter6.domain.AuthRepository
+import com.example.challengechapter6.domain.MainRepository
+import com.example.challengechapter6.domain.TokenRepository
 import com.example.challengechapter6.presentation.usecase.auth.login.InsertTokenUseCase
 import com.example.challengechapter6.presentation.usecase.auth.login.UserLoginUseCase
 import com.example.challengechapter6.presentation.usecase.auth.register.UserRegisterUseCase
@@ -27,8 +27,8 @@ class UseCaseModule {
     @Provides
     fun provideInsertTokenUseCase(
         tokenRepository: TokenRepository
-    ): com.example.challengechapter6.presentation.usecase.auth.login.InsertTokenUseCase {
-        return com.example.challengechapter6.presentation.usecase.auth.login.InsertTokenUseCase(
+    ): InsertTokenUseCase {
+        return InsertTokenUseCase(
             tokenRepository
         )
     }
@@ -37,9 +37,9 @@ class UseCaseModule {
     @Provides
     fun provideUserLoginUseCase(
         authRepository: AuthRepository,
-        insertTokenUseCase: com.example.challengechapter6.presentation.usecase.auth.login.InsertTokenUseCase
-    ): com.example.challengechapter6.presentation.usecase.auth.login.UserLoginUseCase {
-        return com.example.challengechapter6.presentation.usecase.auth.login.UserLoginUseCase(
+        insertTokenUseCase: InsertTokenUseCase
+    ): UserLoginUseCase {
+        return UserLoginUseCase(
             authRepository,
             insertTokenUseCase
         )
@@ -49,8 +49,8 @@ class UseCaseModule {
     @Provides
     fun provideUserRegisterUseCase(
         authRepository: AuthRepository
-    ): com.example.challengechapter6.presentation.usecase.auth.register.UserRegisterUseCase {
-        return com.example.challengechapter6.presentation.usecase.auth.register.UserRegisterUseCase(
+    ): UserRegisterUseCase {
+        return UserRegisterUseCase(
             authRepository
         )
     }
@@ -59,8 +59,8 @@ class UseCaseModule {
     @Provides
     fun provideCheckLoggedInUseCase(
         tokenRepository: TokenRepository
-    ): com.example.challengechapter6.presentation.usecase.main.splashscreen.CheckLoggedInUseCase {
-        return com.example.challengechapter6.presentation.usecase.main.splashscreen.CheckLoggedInUseCase(
+    ): CheckLoggedInUseCase {
+        return CheckLoggedInUseCase(
             tokenRepository
         )
     }
@@ -69,8 +69,8 @@ class UseCaseModule {
     @Provides
     fun provideGameDetailsUseCase(
         mainRepository: MainRepository
-    ): com.example.challengechapter6.presentation.usecase.main.detail.GameDetailsUseCase {
-        return com.example.challengechapter6.presentation.usecase.main.detail.GameDetailsUseCase(
+    ): GameDetailsUseCase {
+        return GameDetailsUseCase(
             mainRepository
         )
     }
@@ -79,8 +79,8 @@ class UseCaseModule {
     @Provides
     fun provideRecommendedGamesUseCase(
         mainRepository: MainRepository
-    ): com.example.challengechapter6.presentation.usecase.main.home.RecommendedGamesUseCase {
-        return com.example.challengechapter6.presentation.usecase.main.home.RecommendedGamesUseCase(
+    ): RecommendedGamesUseCase {
+        return RecommendedGamesUseCase(
             mainRepository
         )
     }
@@ -89,8 +89,8 @@ class UseCaseModule {
     @Provides
     fun providePopularGamesUseCase(
         mainRepository: MainRepository
-    ): com.example.challengechapter6.presentation.usecase.main.home.PopularGamesUseCase {
-        return com.example.challengechapter6.presentation.usecase.main.home.PopularGamesUseCase(
+    ): PopularGamesUseCase {
+        return PopularGamesUseCase(
             mainRepository
         )
     }
@@ -100,8 +100,8 @@ class UseCaseModule {
     fun provideUpdateDataUserUseCase(
         accountRepository: AccountRepository,
         tokenRepository: TokenRepository
-    ): com.example.challengechapter6.presentation.usecase.main.profile.UpdateDataUserUseCase {
-        return com.example.challengechapter6.presentation.usecase.main.profile.UpdateDataUserUseCase(
+    ): UpdateDataUserUseCase {
+        return UpdateDataUserUseCase(
             accountRepository,
             tokenRepository
         )
@@ -112,8 +112,8 @@ class UseCaseModule {
     fun provideGetDataUserUseCase(
         accountRepository: AccountRepository,
         tokenRepository: TokenRepository
-    ): com.example.challengechapter6.presentation.usecase.main.profile.GetDataUserUseCase {
-        return com.example.challengechapter6.presentation.usecase.main.profile.GetDataUserUseCase(
+    ): GetDataUserUseCase {
+        return GetDataUserUseCase(
             accountRepository,
             tokenRepository
         )
@@ -123,8 +123,8 @@ class UseCaseModule {
     @Provides
     fun provideClearDataUserUseCase(
         tokenRepository: TokenRepository
-    ): com.example.challengechapter6.presentation.usecase.main.profile.ClearDataUserUseCase {
-        return com.example.challengechapter6.presentation.usecase.main.profile.ClearDataUserUseCase(
+    ): ClearDataUserUseCase {
+        return ClearDataUserUseCase(
             tokenRepository
         )
     }

@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.challengechapter6.data.remote.response.auth.GetUserResponse
 import com.example.challengechapter6.presentation.usecase.main.profile.ClearDataUserUseCase
 import com.example.challengechapter6.presentation.usecase.main.profile.GetDataUserUseCase
 import com.example.challengechapter6.presentation.usecase.main.profile.UpdateDataUserUseCase
@@ -23,8 +24,8 @@ class ProfileViewModel @Inject constructor(
     private val _editProfile = MutableLiveData<Boolean>()
     val editProfile: LiveData<Boolean> = _editProfile
 
-    private val _showUser = MutableLiveData<com.example.data.remote.response.auth.GetUserResponse>()
-    val showUser: LiveData<com.example.data.remote.response.auth.GetUserResponse> = _showUser
+    private val _showUser = MutableLiveData<GetUserResponse>()
+    val showUser: LiveData<GetUserResponse> = _showUser
 
     private val _openLoginPage = MutableLiveData<Boolean>()
     val openLoginPage: LiveData<Boolean> = _openLoginPage

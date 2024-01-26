@@ -1,5 +1,7 @@
 package com.example.challengechapter6.di
 
+import com.example.challengechapter6.data.remote.service.AuthAPI
+import com.example.challengechapter6.data.remote.service.MainAPI
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -62,13 +64,13 @@ class NetworkModule {
 
     @Singleton
     @Provides
-    fun provideAuthAPI(@Named(RETROFIT_AUTH) retrofit: Retrofit) : com.example.data.remote.service.AuthAPI {
-        return retrofit.create(com.example.data.remote.service.AuthAPI::class.java)
+    fun provideAuthAPI(@Named(RETROFIT_AUTH) retrofit: Retrofit) : AuthAPI {
+        return retrofit.create(AuthAPI::class.java)
     }
 
     @Singleton
     @Provides
-    fun provideMainAPI(@Named(RETROFIT_MAIN) retrofit: Retrofit) : com.example.data.remote.service.MainAPI {
-        return retrofit.create(com.example.data.remote.service.MainAPI::class.java)
+    fun provideMainAPI(@Named(RETROFIT_MAIN) retrofit: Retrofit) : MainAPI {
+        return retrofit.create(MainAPI::class.java)
     }
 }

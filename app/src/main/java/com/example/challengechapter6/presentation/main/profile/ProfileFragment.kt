@@ -24,9 +24,9 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.challengechapter6.R
 import com.example.challengechapter6.common.BlurWorker
 import com.example.challengechapter6.common.uriToFile
+import com.example.challengechapter6.data.remote.response.auth.GetUserResponse
 import com.example.challengechapter6.databinding.FragmentProfileBinding
 import com.example.challengechapter6.presentation.auth.login.LoginActivity
-import com.example.data.remote.response.auth.GetUserResponse
 import com.github.dhaval2404.imagepicker.ImagePicker
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
@@ -65,7 +65,7 @@ class ProfileFragment : Fragment() {
         binding.btnLogout.setOnClickListener { viewModel.clearDataUser() }
     }
 
-    private fun handleShowUser(user: com.example.data.remote.response.auth.GetUserResponse?) {
+    private fun handleShowUser(user: GetUserResponse?) {
         Glide.with(requireContext())
             .load(user?.data?.picture.toString())
             .placeholder(
