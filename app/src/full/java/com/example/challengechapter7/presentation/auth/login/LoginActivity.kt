@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.util.Patterns
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.challengechapter7.databinding.ActivityLoginBinding
 import com.example.challengechapter7.presentation.MainActivity
 import com.example.challengechapter7.presentation.auth.register.RegisterActivity
@@ -33,6 +35,13 @@ class LoginActivity : AppCompatActivity() {
 
     private fun observeLiveData(){
         viewModel.openHomePage.observe(this, ::handleOpenHomePage)
+        viewModel.openHomePage.observe(this){ isLoggedIn ->
+            if(isLoggedIn){
+                binding.btnLogin.setOnClickListener {
+                    //coding open bottom sheet dialog
+                }
+            }
+        }
         viewModel.error.observe(this, ::handleError)
     }
 

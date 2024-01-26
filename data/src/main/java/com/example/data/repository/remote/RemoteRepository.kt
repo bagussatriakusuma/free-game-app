@@ -28,7 +28,7 @@ import okhttp3.RequestBody
 import javax.inject.Inject
 
 class RemoteRepository @Inject constructor(
-    @VisibleForTesting internal val datastore: DatastoreManager,
+    private val datastore: DatastoreManager,
     private val apiAuth: AuthAPI,
     private val apiMain: MainAPI
 ): TokenRepository, AuthRepository, AccountRepository, MainRepository {

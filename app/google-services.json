@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "166180539804",
+    "project_id": "freetogame-synrgy",
+    "storage_bucket": "freetogame-synrgy.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:166180539804:android:b9b2a8eab50e751164cc59",
+        "android_client_info": {
+          "package_name": "com.example.challengechapter7.full.debug"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBmfrkuqTA-FGrEMdLHa6P5nTjCHdZ4D_M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

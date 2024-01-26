@@ -32,7 +32,8 @@
         <item name="android:textSize">@dimen/subtitle1</item>
     </style>
 
-    <style name="textInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+<!--    <style name="textInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">-->
+    <style name="textInputLayout" parent="Widget.MaterialComponents.TextInputLayout.FilledBox.Dense">
         <item name="boxStrokeColor">@color/edit_text_color</item>
         <item name="boxStrokeWidth">0dp</item>
         <item name="boxBackgroundColor">@color/edit_text_color</item>
